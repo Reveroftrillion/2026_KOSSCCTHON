@@ -22,7 +22,7 @@ export default function GroupPreferenceMatrix({ data }: { data: GroupPreferences
         </p>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+      <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
         <table className="w-full min-w-[420px] border-collapse text-sm">
           <thead>
             <tr>
@@ -72,13 +72,13 @@ export default function GroupPreferenceMatrix({ data }: { data: GroupPreferences
                         )}
                         style={
                           value > 0
-                            ? { backgroundColor: `rgba(37, 99, 235, ${Math.max(value / 100, MIN_INTENSITY)})` }
+                            ? { backgroundColor: `rgba(13, 148, 136, ${Math.max(value / 100, MIN_INTENSITY)})` }
                             : undefined
                         }
                       >
                         {value}
                       </div>
-                      {isUnique && <p className="mt-1 text-[10px] font-medium text-amber-600">개인 고유</p>}
+                      {isUnique && <p className="mt-1 text-[10px] font-medium text-orange-600">개인 고유</p>}
                     </td>
                   )
                 })}
@@ -89,7 +89,7 @@ export default function GroupPreferenceMatrix({ data }: { data: GroupPreferences
       </div>
 
       <p className="text-xs text-slate-500">
-        진한 칸일수록 그 사람의 취향에서 비중이 크다는 뜻이에요. 파란 배지는 2명 이상의 공통 취향, 주황
+        진한 칸일수록 그 사람의 취향에서 비중이 크다는 뜻이에요. 민트 배지는 2명 이상의 공통 취향, 산호색
         글자는 특정 멤버만 뚜렷하게 강한 개인 고유 취향이에요.
       </p>
     </div>

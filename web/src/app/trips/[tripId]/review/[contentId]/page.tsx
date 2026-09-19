@@ -114,7 +114,7 @@ export default function ReviewContentPage() {
         </div>
       )}
 
-      <dl className="grid grid-cols-2 gap-x-4 gap-y-3 rounded-xl border border-border p-4 text-sm">
+      <dl className="grid grid-cols-2 gap-x-4 gap-y-3 rounded-xl border border-border bg-card p-4 text-sm shadow-sm">
         <div>
           <dt className="text-muted-foreground">주소</dt>
           <dd className="text-foreground">{content.place.address ?? '-'}</dd>

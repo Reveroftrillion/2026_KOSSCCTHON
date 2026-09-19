@@ -79,7 +79,7 @@ export default function GroupPreferenceView({ tripId }: { tripId: string }) {
     <div className="space-y-5">
       <GroupPreferenceMatrix data={data} />
 
-      <section className="rounded-xl border border-slate-200 bg-white p-4">
+      <section className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
         <h2 className="text-sm font-semibold text-slate-700">해석</h2>
         {commonSentences.length === 0 && uniqueSentences.length === 0 && otherSentences.length === 0 ? (
           <p className="mt-2 text-sm text-slate-500">
@@ -97,7 +97,7 @@ export default function GroupPreferenceView({ tripId }: { tripId: string }) {
             ))}
             {uniqueSentences.map((s) => (
               <li key={s} className="flex gap-1.5">
-                <span className="mt-0.5 shrink-0 rounded-full bg-amber-100 px-1.5 text-[10px] font-semibold text-amber-700">
+                <span className="mt-0.5 shrink-0 rounded-full bg-orange-100 px-1.5 text-[10px] font-semibold text-orange-700">
                   개인
                 </span>
                 {s}

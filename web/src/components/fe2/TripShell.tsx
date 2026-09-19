@@ -49,7 +49,7 @@ export default function TripShell({ tripId, children }: { tripId: string; childr
               ← TripClip
             </Link>
             <Link href={`/trips/${tripId}`} className="mt-1 block">
-              <h1 className="text-2xl font-bold text-slate-900">{trip.name}</h1>
+              <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">{trip.name}</h1>
             </Link>
             <p className="mt-1 text-sm text-slate-600">
               {trip.destination} · {formatDateRange(trip.startDate, trip.endDate)}
@@ -74,7 +74,7 @@ export default function TripShell({ tripId, children }: { tripId: string; childr
                   className={cn(
                     '-mb-px min-w-0 border-b-2 py-2.5 text-center text-xs font-medium transition-colors sm:text-sm',
                     active
-                      ? 'border-blue-600 text-blue-600'
+                      ? 'border-blue-600 text-blue-700'
                       : 'border-transparent text-slate-500 hover:text-slate-700',
                   )}
                 >

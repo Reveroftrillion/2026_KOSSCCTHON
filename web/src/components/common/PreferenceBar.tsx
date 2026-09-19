@@ -15,7 +15,7 @@ export function PreferenceBar({
   return (
     <div className={cn('flex flex-col gap-1', className)}>
       <div className="flex items-center justify-between text-sm">
-        <span className={cn('font-medium text-foreground', highlighted && 'text-primary')}>{item.label}</span>
+        <span className={cn('font-medium text-foreground', highlighted && 'text-secondary-foreground')}>{item.label}</span>
         <span className="text-muted-foreground">근거 {item.evidenceCount}건</span>
       </div>
       <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
