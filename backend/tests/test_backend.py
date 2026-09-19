@@ -14,8 +14,17 @@ from sqlalchemy.pool import StaticPool
 from backend.main import app, get_db, hash_password
 
 
-class BackendTests(unittest.TestCase):
+class BackendFixture(unittest.TestCase):
     """Run actual endpoint SQL with only MySQL DDL syntax adapted for SQLite."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.client = TestClient(app)
+        cls.client.__enter__()
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.client.__exit__(None, None, None)
 
     def setUp(self) -> None:
         self.engine = create_engine("sqlite://", connect_args={"check_same_thread": False}, poolclass=StaticPool)
@@ -28,10 +37,11 @@ class BackendTests(unittest.TestCase):
         schema = (Path(__file__).resolve().parents[1] / "db/schema.sql").read_text(encoding="utf-8")
         schema = re.sub(r"--[^\n]*", "", schema)
         with self.engine.begin() as connection:
-            for table in ("users", "user_preferences", "trips", "trip_members"):
+            for table in re.findall(r"CREATE TABLE (\w+)", schema):
                 ddl = re.search(rf"CREATE TABLE {table} \(.*?\);", schema, re.S).group()
                 ddl = re.sub(r",\s*INDEX \w+ \([^)]*\)", "", ddl)
                 ddl = re.sub(r"UNIQUE KEY \w+", "UNIQUE", ddl)
+                ddl = ddl.replace("CHARACTER SET ascii COLLATE ascii_bin", "")
                 connection.exec_driver_sql(ddl)
             for user in ("owner", "other"):
                 connection.execute(text("INSERT INTO users (user_id, name, email, password_hash) VALUES (:id, :id, :email, 'test-only')"), {"id": user, "email": user + "@example.com"})
@@ -42,13 +52,10 @@ class BackendTests(unittest.TestCase):
                 yield session
 
         app.dependency_overrides[get_db] = override_db
-        self.client = TestClient(app)
-        self.client.__enter__()
         self.body = {"trip_name": "성수 여행", "region": "성수", "start_date": "2026-09-20", "end_date": "2026-09-20",
                      "owner_user_id": "owner", "day_start_time": "13:00:00", "day_end_time": "20:00:00", "description": ""}
 
     def tearDown(self) -> None:
-        self.client.__exit__(None, None, None)
         app.dependency_overrides.clear()
         self.engine.dispose()
 
@@ -57,6 +64,7 @@ class BackendTests(unittest.TestCase):
         self.assertEqual(response.status_code, 201, response.text)
         return response.json()["trip_id"]
 
+class BackendTests(BackendFixture):
     def test_post_user(self) -> None:
         response = self.client.post("/api/users", json={"name": "테스트", "email": "new@example.com", "password": "example-password"})
         self.assertEqual(response.status_code, 201, response.text)

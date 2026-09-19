@@ -87,6 +87,9 @@ CREATE TABLE trip_itineraries (
     trip_id VARCHAR(36) NOT NULL,
     day_number INT NOT NULL,        -- 1일차, 2일차...
     summary TEXT,                   -- AI가 요약한 일정 설명
+    preference_coverage JSON,
+    preference_reflection JSON,
+    result_json JSON,
     preference_reflection_rates JSON, -- 예: {"원영": 83, "민수": 78, "지수": 85} (취향 반영도)
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -102,10 +105,33 @@ CREATE TABLE itinerary_places (
     sequence_order INT NOT NULL,    -- 방문 순서 (1, 2, 3...)
     visit_start_time TIME NOT NULL,
     visit_end_time TIME NOT NULL,
+    user_scores JSON,
+    group_score DOUBLE,
     related_users JSON,             -- 예: ["민수"] 또는 ["원영", "지수"] (어떤 사람들의 취향이 반영되었는지)
     notes TEXT,                     -- AI가 남긴 추천 이유 ("민수의 팝업 및 쇼핑 취향을 반영했습니다.")
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (itinerary_id) REFERENCES trip_itineraries(itinerary_id) ON DELETE CASCADE,
     FOREIGN KEY (place_id) REFERENCES places(place_id) ON DELETE CASCADE,
     INDEX idx_itinerary_places_order (itinerary_id, sequence_order)
+);
+
+CREATE TABLE shortform_contents (
+    content_id VARCHAR(36) PRIMARY KEY,
+    trip_id VARCHAR(36) NOT NULL,
+    user_id VARCHAR(36) NOT NULL,
+    platform VARCHAR(30) DEFAULT 'youtube',
+    url VARCHAR(500) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+    title VARCHAR(500),
+    category VARCHAR(50),
+    keywords JSON,
+    area VARCHAR(100),
+    activity VARCHAR(255),
+    place_name VARCHAR(255),
+    recommended_time VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (trip_id) REFERENCES trips(trip_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    UNIQUE KEY unique_shortform (trip_id, user_id, url),
+    INDEX idx_shortform_trip (trip_id),
+    INDEX idx_shortform_user (user_id)
 );

@@ -401,6 +401,8 @@ def create_trip(
             "day_end_time": trip_data.day_end_time,
             "description": trip_data.description
         })
+        db.execute(text("INSERT INTO trip_members (trip_member_id,trip_id,user_id) VALUES (:id,:trip,:user)"),
+                   {"id": str(uuid.uuid4()), "trip": trip_id, "user": trip_data.owner_user_id})
         db.commit()
 
         logger.info(f"Trip created successfully: {trip_id}")
@@ -606,6 +608,10 @@ def update_trip(
             "day_end_time": trip_data.day_end_time,
             "description": trip_data.description
         })
+        if not db.execute(text("SELECT user_id FROM trip_members WHERE trip_id=:trip AND user_id=:user"),
+                          {"trip": trip_id, "user": trip_data.owner_user_id}).fetchone():
+            db.execute(text("INSERT INTO trip_members (trip_member_id,trip_id,user_id) VALUES (:id,:trip,:user)"),
+                       {"id": str(uuid.uuid4()), "trip": trip_id, "user": trip_data.owner_user_id})
         db.commit()
 
         logger.info(f"Trip updated successfully: {trip_id}")
@@ -644,9 +650,18 @@ def delete_trip(trip_id: str, db: Session = Depends(get_db)):
                 detail="여행을 찾을 수 없습니다."
             )
 
+        from backend.services.common import require
+        from backend.services.preference_service import recalculate
+        require(db, "trips", trip_id, lock=True)
+        affected_users = db.execute(text("SELECT DISTINCT user_id FROM shortform_contents WHERE trip_id=:id ORDER BY user_id"), {"id": trip_id}).scalars().all()
+        for affected_user in affected_users:
+            require(db, "users", affected_user, lock=True)
+
         # 2. 여행 삭제
         delete_query = text("DELETE FROM trips WHERE trip_id = :trip_id")
         db.execute(delete_query, {"trip_id": trip_id})
+        for affected_user in affected_users:
+            recalculate(db, affected_user)
         db.commit()
 
         logger.info(f"Trip deleted successfully: {trip_id}")
@@ -669,6 +684,27 @@ def delete_trip(trip_id: str, db: Session = Depends(get_db)):
 
 
 # ==================== 서버 실행 ====================
+
+from fastapi.responses import JSONResponse
+from sqlalchemy.exc import SQLAlchemyError
+from backend.services.common import ServiceError
+from backend.routers import members, shortforms, preferences, itineraries
+app.include_router(members.router)
+app.include_router(shortforms.router)
+app.include_router(preferences.router)
+app.include_router(itineraries.router)
+
+
+@app.exception_handler(ServiceError)
+async def service_error_handler(request, error):
+    return JSONResponse(status_code=error.status, content={"detail": error.message})
+
+
+@app.exception_handler(SQLAlchemyError)
+async def database_error_handler(request, error):
+    logger.error("Database operation failed: %s", type(error).__name__)
+    return JSONResponse(status_code=500, content={"detail": "Database operation failed."})
+
 
 if __name__ == "__main__":
     import uvicorn
