@@ -1,14 +1,5 @@
 import type { Category, TimeSlot } from '@/lib/types';
 
-export const CATEGORY_LIST: Category[] = [
-  'cafe',
-  'food',
-  'exhibition',
-  'shopping',
-  'sightseeing',
-  'activity',
-];
-
 export const CATEGORY_LABEL: Record<Category, string> = {
   cafe: '카페',
   food: '맛집',
@@ -18,7 +9,7 @@ export const CATEGORY_LABEL: Record<Category, string> = {
   activity: '액티비티',
 };
 
-export const TIME_SLOT_LIST: TimeSlot[] = ['morning', 'afternoon', 'evening', 'night'];
+export const CATEGORY_LIST = Object.keys(CATEGORY_LABEL) as Category[];
 
 export const TIME_SLOT_LABEL: Record<TimeSlot, string> = {
   morning: '아침',
@@ -26,3 +17,5 @@ export const TIME_SLOT_LABEL: Record<TimeSlot, string> = {
   evening: '저녁',
   night: '밤',
 };
+
+export const TIME_SLOT_LIST = Object.keys(TIME_SLOT_LABEL) as TimeSlot[];

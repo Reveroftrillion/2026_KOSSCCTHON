@@ -7,8 +7,7 @@ import { getUserPreferences } from '@/lib/api';
 import { useUser } from '@/lib/user-context';
 import { EmptyState, ErrorState, LoadingSteps, PreferenceBar } from '@/components/common';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { buttonVariants } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 
 export default function MyPreferencesPage() {
   const { currentUser } = useUser();

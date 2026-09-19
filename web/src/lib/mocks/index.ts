@@ -7,7 +7,10 @@ import type {
   UserPreferences,
 } from '@/lib/types';
 import { mockStore } from './store';
-import { sleep } from './sleep';
+
+// 로딩 UI 확인용 지연 (500~1500ms)
+const sleep = (min = 500, max = 1500) =>
+  new Promise<void>((r) => setTimeout(r, min + Math.random() * (max - min)));
 
 export async function createContent(input: {
   url: string;
