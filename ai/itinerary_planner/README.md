@@ -140,6 +140,12 @@ Backend의 향후 Maps 결과를 `place_candidates`로 전달한다. 각 장소�
 - `place_scoring.score_user_place()`: `0.6 × category_score + 0.4 × keyword_score`.
   keyword_score는 사용자 취향 dict에 존재하는 장소 키워드들의 평균이다. 중복 키워드는
   한 번만 세고, 매칭이 없으면 0이다. 장소의 모든 키워드 수로 나누지는 않는다.
+  단, 해당 장소의 category 선호 점수가 0이고 양수로 매칭된 키워드가
+  `local`, `date`, `photo`뿐이면 keyword_score를 최대 0.5로 제한한다.
+  따라서 범용 키워드만의 최종 점수 기여는 최대 0.2다. 카테고리 선호가 있거나
+  구체적인 키워드의 양수 근거가 있으면 기존 계산을 유지한다.
+  이는 관련 없는 카테고리로 범용 키워드 점수가 과도하게 전이되는 것을 줄이는
+  MVP 상한이며, 사용자 만족도를 통해 보정된 통계적 값은 아니다.
 - `place_scoring.score_places()`: 각 장소의 사용자별 점수와 전체 사용자 평균 `group_score` 계산.
 - `place_selector.select_places()`: 후보 추가 후 예상 coverage를 구하고,
   `0.7 × group_score + 0.3 × min(projected_coverage)`가 가장 큰 장소를 순차 선택한다.

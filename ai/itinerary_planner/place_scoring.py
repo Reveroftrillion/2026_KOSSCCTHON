@@ -5,13 +5,18 @@ from typing import Any
 
 CATEGORY_WEIGHT = 0.6
 KEYWORD_WEIGHT = 0.4
+GENERIC_KEYWORDS = frozenset({"local", "date", "photo"})
+GENERIC_ONLY_KEYWORD_CAP = 0.5
 
 
 def score_user_place(user: dict[str, Any], place: dict[str, Any]) -> dict[str, Any]:
-    """Average matching keyword scores only, then combine with category affinity."""
+    """Average matches; cap generic-only evidence when category affinity is absent."""
     category_score = user["category_preferences"].get(place["category"], 0.0)
     matched = sorted(set(place["keywords"]) & user["keyword_preferences"].keys())
     keyword_score = math.fsum(user["keyword_preferences"][key] for key in matched) / len(matched) if matched else 0.0
+    positive_matches = {key for key in matched if user["keyword_preferences"][key] > 0}
+    if category_score == 0 and positive_matches and positive_matches <= GENERIC_KEYWORDS:
+        keyword_score = min(keyword_score, GENERIC_ONLY_KEYWORD_CAP)
     return {
         "category_score": category_score,
         "keyword_score": keyword_score,

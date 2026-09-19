@@ -156,6 +156,12 @@ python -m unittest ai.preference_analyzer.test_pipeline -v
 
 ## 분석 흐름
 
+Claude 분류 기준: 맛집·카페·전시처럼 주목적이 명확하면 기존 구체적 카테고리를 유지한다.
+여러 종류의 장소를 묶은 여행·당일치기·동네 탐방·데이트 코스는 `sightseeing`,
+놀이·체험 중심 데이트는 `activity`로 안내한다. `date`나 `photo`라는 말만으로 단일 카페·맛집·전시
+분류를 바꾸지 않는다. `other`는 기존 분류에 맞지 않거나 근거가 부족한 경우에 한한다.
+이 기준은 Claude 프롬프트에 적용하며 규칙 기반 fallback은 기존 동작을 유지한다.
+
 `ContentInput` → `content_parser.analyze_content()` → `llm_parser` →
 `AnalyzedContent` → `PreferenceDB.update()` → 사용자별 취향 프로필.
 
