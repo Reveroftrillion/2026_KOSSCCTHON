@@ -11,6 +11,7 @@ class ServiceFlowTests(BackendFixture):
             response = self.client.post("/api/users", json={"name": f"User {index}", "email": f"smoke{index}@example.com", "password": "smoke-password"})
             self.assertEqual(response.status_code, 201)
             users.append(response.json()["user_id"])
+        self.authenticate_as(users[0])
         response = self.client.post("/api/trips", json={**self.body, "owner_user_id": users[0]})
         self.assertEqual(response.status_code, 201)
         trip = response.json()["trip_id"]
@@ -19,6 +20,7 @@ class ServiceFlowTests(BackendFixture):
             self.assertEqual(self.client.post(base + "/members", json={"user_id": user}).status_code, 201)
         self.assertEqual(len(self.client.get(base + "/members").json()["data"]), 3)
         for index, user in enumerate(users):
+            self.authenticate_as(user)
             category, keyword = [("cafe", "dessert"), ("outdoor", "nature"), ("exhibition", "art")][index]
             output = {"metadata": {"title": category}, "analysis": {"category": category, "keywords": [keyword], "place_name": None}}
             with patch("backend.services.preference_service.analyze_youtube_url", return_value=output):

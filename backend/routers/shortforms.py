@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from backend.database import get_db
+from backend.auth import get_current_user, require_same_user
 from backend.services import preference_service as service
 
 router = APIRouter(prefix="/api/trips/{trip_id}/shortforms", tags=["Shortforms"])
@@ -19,7 +20,8 @@ class ShortformUpdateRequest(BaseModel):
     recommended_time: str | None = Field(default=None, max_length=50)
 
 @router.post("", status_code=201)
-def create(trip_id: str, body: ShortformRequest, db: Session = Depends(get_db)) -> dict:
+def create(trip_id: str, body: ShortformRequest, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)) -> dict:
+    require_same_user(body.user_id, current_user)
     return service.save_shortform(db, trip_id, body.user_id, body.url)
 
 

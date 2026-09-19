@@ -1,3 +1,5 @@
+import { AUTH_EXPIRED, clearAccessToken, getAccessToken } from '../auth-token'
+
 export const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8000').replace(/\/+$/, '')
 export const USE_MOCK = process.env.NEXT_PUBLIC_USE_MOCK === 'true'
 
@@ -14,10 +16,14 @@ export class HttpError extends Error {
 // AI 호출(일정 생성)은 수 초~수십 초 걸릴 수 있다.
 const DEFAULT_TIMEOUT_MS = 60_000
 
-type HttpInit = RequestInit & { timeoutMs?: number }
+type HttpInit = RequestInit & { timeoutMs?: number; auth?: boolean }
 
 export async function http<T>(path: string, init?: HttpInit): Promise<T> {
-  const { timeoutMs = DEFAULT_TIMEOUT_MS, ...rest } = init ?? {}
+  const { timeoutMs = DEFAULT_TIMEOUT_MS, auth = true, ...rest } = init ?? {}
+  const headers = new Headers(rest.headers)
+  headers.set('Content-Type', 'application/json')
+  const token = !USE_MOCK && auth ? getAccessToken() : ''
+  if (token && !headers.has('Authorization')) headers.set('Authorization', `Bearer ${token}`)
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), timeoutMs)
 
@@ -26,7 +32,7 @@ export async function http<T>(path: string, init?: HttpInit): Promise<T> {
     res = await fetch(`${API_BASE_URL}${path}`, {
       ...rest,
       signal: controller.signal,
-      headers: { 'Content-Type': 'application/json', ...rest.headers },
+      headers,
     })
   } catch (e) {
     if (e instanceof DOMException && e.name === 'AbortError') {
@@ -38,11 +44,20 @@ export async function http<T>(path: string, init?: HttpInit): Promise<T> {
   }
 
   if (!res.ok) {
+    if (res.status === 401 && auth && !USE_MOCK && typeof window !== 'undefined') {
+      // A late response from a previous login must not clear a newer session.
+      const sent = headers.get('Authorization')
+      if (!getAccessToken() || sent === `Bearer ${getAccessToken()}`) {
+        clearAccessToken()
+        window.dispatchEvent(new Event(AUTH_EXPIRED))
+      }
+    }
     // FastAPI는 {detail}, 그 외 {message}를 흔히 쓴다. 없으면 status만 보여준다.
     let detail = ''
     try {
       const body = (await res.json()) as { detail?: unknown; message?: unknown }
       if (typeof body.detail === 'string') detail = body.detail
+      else if (Array.isArray(body.detail)) detail = body.detail.map(item => typeof item?.msg === 'string' ? item.msg : '').filter(Boolean).join(' / ')
       else if (typeof body.message === 'string') detail = body.message
     } catch {
       // 본문이 JSON이 아니면 무시
