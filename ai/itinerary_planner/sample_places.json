@@ -1,0 +1,10 @@
+[
+  {"place_id":"p1","name":"성수 디저트 카페","category":"cafe","keywords":["dessert","photo","date"],"lat":37.544,"lng":127.056},
+  {"place_id":"p2","name":"성수 전시회","category":"exhibition","keywords":["art","photo","indoor"],"lat":37.545,"lng":127.054},
+  {"place_id":"p3","name":"서울숲","category":"outdoor","keywords":["nature","photo","walk"],"lat":37.544,"lng":127.037},
+  {"place_id":"p4","name":"성수 일식집","category":"food","keywords":["food","date","local"],"lat":37.542,"lng":127.055},
+  {"place_id":"p5","name":"성수 팝업스토어","category":"activity","keywords":["shopping","photo","indoor"],"lat":37.543,"lng":127.058},
+  {"place_id":"p6","name":"성수 빈티지숍","category":"shopping","keywords":["indoor","local"],"lat":37.546,"lng":127.057},
+  {"place_id":"p7","name":"연남 조용한 카페","category":"cafe","keywords":["quiet","dessert"],"lat":37.562,"lng":126.925},
+  {"place_id":"p8","name":"성수 산책 전망대","category":"sightseeing","keywords":["nature","photo"],"lat":37.540,"lng":127.040}
+]
