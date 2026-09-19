@@ -62,11 +62,34 @@ def analyze_preferences(personal_preference_db: dict[str, Any]) -> dict[str, Any
     }
 
 
+def balance_group_preferences(
+    analysis: dict[str, Any], group_saved_places: dict[str, list[str]]
+) -> dict[str, Any]:
+    """Structure the existing group preference analysis, together with each
+    member's saved places, into a group_preference_profile for the itinerary
+    generation step to consume. Does not change or re-derive the analysis."""
+    group_preference_profile = {
+        user: {
+            "categories": categories,
+            "saved_places": group_saved_places.get(user, []),
+        }
+        for user, categories in analysis["user_preferences"].items()
+    }
+
+    return {
+        "group_preference_profile": group_preference_profile,
+        "common_preferences": analysis["common_preferences"],
+        "individual_only_preferences": analysis["individual_only_preferences"],
+        "preference_differences": analysis["preference_differences"],
+    }
+
+
 def main() -> None:
     with SAMPLE_INPUT_PATH.open(encoding="utf-8") as input_file:
         sample_input = json.load(input_file)
 
     analysis = analyze_preferences(sample_input["personal_preference_db"])
+    balanced = balance_group_preferences(analysis, sample_input["group_saved_places"])
 
     print("사용자별 취향")
     for user, categories in analysis["user_preferences"].items():
@@ -82,6 +105,12 @@ def main() -> None:
     print("\n구성원 간 취향 차이")
     for user, categories in analysis["preference_differences"].items():
         print(f"- {user}에게 없는 다른 구성원의 취향: {', '.join(categories) or '없음'}")
+
+    print("\n그룹 취향 프로필 (일정 생성 단계에서 사용할 정보)")
+    for user, profile in balanced["group_preference_profile"].items():
+        categories = ", ".join(profile["categories"]) or "없음"
+        places = ", ".join(profile["saved_places"]) or "없음"
+        print(f"- {user}: 취향[{categories}] / 저장 장소[{places}]")
 
 
 if __name__ == "__main__":
