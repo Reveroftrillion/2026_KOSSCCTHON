@@ -25,6 +25,24 @@ def _to_hhmm(minutes: int) -> str:
     return f"{minutes // 60:02d}:{minutes % 60:02d}"
 
 
+def build_reason(
+    category: str | None, group_preference_profile: dict[str, dict[str, Any]]
+) -> str:
+    """Explain a stop using only categories already recorded in
+    group_preference_profile: every member whose own preference categories
+    include this stop's category is named as the basis for including it."""
+    if category is not None:
+        interested_users = [
+            user
+            for user, profile in group_preference_profile.items()
+            if category in profile["categories"]
+        ]
+        if interested_users:
+            names = ", ".join(interested_users)
+            return f"{names}의 {category} 취향을 반영했습니다."
+    return "현재 데이터로 확인할 수 있는 취향 근거가 없습니다."
+
+
 def generate_schedule(
     group_preference_profile: dict[str, dict[str, Any]], time_range: str
 ) -> list[dict[str, Any]]:
@@ -57,6 +75,7 @@ def generate_schedule(
                 "place": stop["place"],
                 "category": stop["category"],
                 "related_users": [stop["user"]],
+                "reason": build_reason(stop["category"], group_preference_profile),
             }
         )
     return schedule
@@ -108,6 +127,7 @@ def main() -> None:
     for item in itinerary["schedule"]:
         related = ", ".join(item["related_users"])
         print(f"{item['time']} {item['place']} ({item['category']}) - {related}")
+        print(f"  → {item['reason']}")
 
     print("\n현재 데이터로 검증할 수 없는 사용자 조건")
     for condition in itinerary["unverifiable_conditions"]:
