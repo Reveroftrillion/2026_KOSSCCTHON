@@ -47,6 +47,8 @@ def analyze_with_rules(content: ContentInput | Mapping[str, Any]) -> AnalyzedCon
     """
     item = ContentInput.model_validate(content)
     title, description = item.title.lower(), item.description.lower()
+    if item.tags:
+        description += " " + " ".join(item.tags).lower()
     text = f"{title} {description}"
     scores = {
         category: sum(2 * _matches(title, term) + _matches(description, term) for term in terms)

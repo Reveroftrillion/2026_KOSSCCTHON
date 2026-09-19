@@ -70,11 +70,57 @@ JSON 전체를 감싼 코드 블록은 허용하고, 잘린 응답이나 잘못�
   키워드 비율 합은 1일 필요가 없다. 저장소는 메모리 기반이며 종료하면 초기화된다.
   같은 콘텐츠를 다시 추가하면 별도 입력으로 누적된다.
 
-## 다음 URL 연동 위치
+## YouTube URL 분석
 
-향후 YouTube Shorts 메타데이터 수집기를 `analyze_content()` 앞에 연결한다.
-URL에서 얻은 `title`, `description`에 `user_id`, `url`을 붙여 `ContentInput`으로
-전달하면 이후 분석·취향 계산 코드를 재사용할 수 있다. 현재 URL은 수집하지 않는다.
+```powershell
+python -m pip install -r ai/preference_analyzer/requirements.txt
+python ai/preference_analyzer/youtube_sample.py "https://www.youtube.com/shorts/VIDEO_ID" --user-id 1
+python -m unittest ai.preference_analyzer.test_pipeline ai.preference_analyzer.test_youtube -v
+```
+
+`VIDEO_ID`는 실제 11자리 영상 ID로 바꾼다. `youtube.com/shorts/`,
+`www.youtube.com/shorts/`, `youtube.com/watch?v=`, `youtu.be/`를 지원한다.
+URL 호스트·경로·ID를 검증하며, 공유 쿼리와 무관하게 같은 ID를 추출한다.
+URL 형식만으로 해당 영상이 Shorts인지는 판별하지 않는다.
+
+- `YOUTUBE_API_KEY` 있음: 공식 Data API v3 `videos.list(part=snippet, id=...)`.
+- 키 없음 또는 공백: 공식 YouTube oEmbed. 내부 요청은 동일 ID의 watch URL로 정규화한다.
+- Data API 오류에는 명확한 오류를 반환한다. 키가 있는 경우 oEmbed로 재시도하지 않는다.
+- oEmbed는 제목·채널·썸네일만 수집한다. 설명과 태그는 빈 값이므로 분석 근거가 제한된다.
+- 수집 요청에는 10초 타임아웃을 적용하고 리다이렉트는 따르지 않는다.
+- `ContentInput.tags`는 기본값이 빈 배열인 선택 필드다. Claude와 규칙 분석 모두 활용한다.
+- 다운로드·HTML 크롤링·영상 분석은 하지 않는다. 메타데이터를 얻지 못하면 DB를 갱신하지 않는다.
+- CLI는 사용자에게 오류를 출력하고 종료 코드 1을 반환한다. 성공 시 0을 반환한다.
+  제목이 없으면 분석을 중단하고, 설명·태그가 없어도 제목으로 진행한다.
+
+Backend용 진입점은 다음과 같다. 반환값은 JSON 직렬화 가능한 dict다.
+
+```python
+from ai.preference_analyzer import MetadataError, PreferenceDB, analyze_youtube_url, process_youtube_url
+
+db = PreferenceDB()  # 여러 요청에서 누적하려면 같은 인스턴스를 재사용한다.
+try:
+    result = process_youtube_url(user_id=1, url=youtube_url, preference_db=db)
+    # result: metadata, analysis, preference_profile
+except MetadataError as error:
+    message = str(error)  # URL/수집 실패를 사용자에게 안내할 수 있는 메시지
+```
+
+`analyze_youtube_url(user_id, url)`은 DB를 갱신하지 않고 `metadata`, `analysis`만 반환한다.
+잘못된 사용자 ID는 Pydantic `ValidationError`이며, 수집 오류는 `MetadataError`다.
+`process_youtube_url()`은 분석 완료 후 기존 DB의 `update()`를 한 번 호출한다.
+CLI는 실행마다 새 메모리 DB를 만든다. 동일 URL을 재입력하면 기존 정책대로 누적된다.
+
+추가 직접 의존성은 `httpx>=0.27,<1.0`이다. 기존 `LLM_*` 환경변수는 그대로 사용한다.
+새 `.env` 파일은 생성하지 않는다.
+
+검증: 기존 14개 + YouTube 13개 = 27개 모의 테스트 통과.
+실제 공개 watch URL `https://www.youtube.com/watch?v=jNQXAC9IVRw`에서 oEmbed 수집과
+rule-based 프로필 생성에 성공했다. 이번 작업 환경에는 API 키가 없어 실제 Data API와
+Claude 호출은 검증하지 않았다. Shorts URL 파싱 및 Claude 연결은 모의 테스트로 검증했다.
+
+수집 참고: [YouTube videos.list 공식 문서](https://developers.google.com/youtube/v3/docs/videos/list),
+[oEmbed 명세](https://oembed.com/).
 
 국민대 provider에 대한 실제 연결 성공 여부는 유효한 `LLM_API_KEY`를 설정한 뒤
 `[Parser] llm` 출력으로 확인한다. 모의 HTTP 테스트는 서버 연결 검증을 대신하지 않는다.

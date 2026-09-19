@@ -30,6 +30,22 @@ class ContentInput(BaseModel):
     url: HttpUrl | None = None
     title: str = ""
     description: str = ""
+    tags: list[str] = Field(default_factory=list)
+
+
+class YouTubeMetadata(BaseModel):
+    """YouTube 공식 API에서 수집한 공개 메타데이터."""
+
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    platform: Literal["youtube"] = "youtube"
+    url: str
+    video_id: str
+    title: str = Field(min_length=1)
+    description: str = ""
+    tags: list[str] = Field(default_factory=list)
+    channel_title: str | None = None
+    thumbnail_url: str | None = None
 
 
 class AnalyzedContent(BaseModel):
