@@ -19,7 +19,7 @@ export default function ItineraryGeneratingSteps() {
   }, [])
 
   return (
-    <div role="status" aria-live="polite" className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div role="status" aria-live="polite" className="rounded-xl border border-slate-200 p-6 shadow-sm">
       <ul className="space-y-3">
         {STEPS.map((label, i) => {
           const state = i < stepIndex ? 'done' : i === stepIndex ? 'active' : 'pending'

@@ -78,7 +78,7 @@ function DayTimeline({
               }}
               onClick={() => setSelectedOrder(item.order)}
               className={cn(
-                'cursor-pointer rounded-xl border bg-white p-4 shadow-sm transition-colors',
+                'cursor-pointer rounded-xl border p-4 shadow-sm transition-colors',
                 active ? 'border-blue-500 ring-2 ring-blue-100' : 'border-slate-200',
               )}
             >
@@ -100,7 +100,7 @@ function DayTimeline({
                   </p>
                   {item.place.address && <p className="truncate text-xs text-muted-foreground">{item.place.address}</p>}
                 </div>
-                <span className="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-foreground/80">
+                <span className="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
                   {categoryLabel(item.category)}
                 </span>
               </div>

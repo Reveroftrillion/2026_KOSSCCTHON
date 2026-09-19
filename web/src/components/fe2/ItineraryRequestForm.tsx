@@ -165,7 +165,7 @@ export default function ItineraryRequestForm({
                     'flex w-full items-center justify-between rounded-lg border px-3 py-2 text-left text-sm transition-colors',
                     checked
                       ? 'border-blue-600 bg-blue-50 text-blue-800'
-                      : 'border-slate-200 bg-white text-foreground/90 hover:bg-slate-50',
+                      : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50',
                   )}
                 >
                   <span className="truncate">{content.place.name}</span>
