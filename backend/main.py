@@ -298,6 +298,41 @@ def get_user(user_id: str, db: Session = Depends(get_db)):
             detail=f"사용자 조회 중 오류가 발생했습니다: {type(e).__name__}"
         )
 
+@app.get("/api/users")
+def list_users(db: Session = Depends(get_db)):
+    """활성 사용자 목록 조회 API"""
+    try:
+        results = db.execute(
+            text("""
+                SELECT
+                    user_id,
+                    name,
+                    email
+                FROM users
+                WHERE is_active = TRUE
+                ORDER BY created_at, user_id
+            """)
+        ).mappings().all()
+
+        return {
+            "status": "success",
+            "data": [
+                {
+                    "user_id": row["user_id"],
+                    "name": row["name"],
+                    "email": row["email"],
+                }
+                for row in results
+            ],
+        }
+
+    except Exception as e:
+        logger.error("Error fetching users: %s", type(e).__name__)
+        raise HTTPException(
+            status_code=500,
+            detail="사용자 목록 조회 중 오류가 발생했습니다.",
+        )
+
 
 # ==================== 여행 API ====================
 
