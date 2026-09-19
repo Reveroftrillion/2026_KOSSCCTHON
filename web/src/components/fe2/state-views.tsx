@@ -47,7 +47,7 @@ export function PageEmpty({
   children?: ReactNode
 }) {
   return (
-    <div className="rounded-xl border border-dashed border-slate-300 bg-white p-6 text-center">
+    <div className="rounded-xl border border-dashed border-slate-300 p-6 text-center">
       <p className="font-semibold text-foreground/95">{title}</p>
       {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
       {children && <div className="mt-4 flex justify-center">{children}</div>}

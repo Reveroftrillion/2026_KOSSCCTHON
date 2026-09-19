@@ -120,7 +120,7 @@ export default function ItineraryPlanner({ tripId }: { tripId: string }) {
       )}
 
       {contents.length === 0 && (
-        <p className="rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs text-muted-foreground">
+        <p className="rounded-lg border border-dashed border-slate-300 px-3 py-2 text-xs text-muted-foreground">
           저장된 숏폼이 없어도 그룹 취향만으로 일정을 만들 수 있어요. 필수 장소를 고르려면 먼저 숏폼을 담아 주세요.
         </p>
       )}

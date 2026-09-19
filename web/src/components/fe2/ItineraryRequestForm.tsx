@@ -126,7 +126,7 @@ export default function ItineraryRequestForm({
               'rounded-full border px-4 py-1.5 text-sm transition-colors',
               includeMeals
                 ? 'border-blue-600 bg-blue-600 text-white'
-                : 'border-slate-300 bg-white text-foreground/90 hover:bg-slate-50',
+                : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50',
             )}
           >
             포함
@@ -139,7 +139,7 @@ export default function ItineraryRequestForm({
               'rounded-full border px-4 py-1.5 text-sm transition-colors',
               !includeMeals
                 ? 'border-blue-600 bg-blue-600 text-white'
-                : 'border-slate-300 bg-white text-foreground/90 hover:bg-slate-50',
+                : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50',
             )}
           >
             미포함

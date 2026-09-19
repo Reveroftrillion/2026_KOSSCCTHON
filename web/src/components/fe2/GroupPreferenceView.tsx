@@ -105,7 +105,7 @@ export default function GroupPreferenceView({ tripId }: { tripId: string }) {
             ))}
             {otherSentences.map((s) => (
               <li key={s} className="flex gap-1.5 text-muted-foreground">
-                <span className="mt-0.5 shrink-0 rounded-full bg-slate-100 px-1.5 text-[10px] font-semibold text-foreground/80">
+                <span className="mt-0.5 shrink-0 rounded-full bg-slate-100 px-1.5 text-[10px] font-semibold text-slate-500">
                   기타
                 </span>
                 {s}
