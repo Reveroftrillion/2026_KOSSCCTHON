@@ -3,7 +3,8 @@
 import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
 import { buttonVariants } from '@/components/ui/button'
-import { getGroupPreferences } from '@/lib/api/groups'
+import { getGroupPreferences } from '@/lib/api/preferences'
+import { categoryLabel } from '@/lib/categories'
 import GroupPreferenceMatrix from './GroupPreferenceMatrix'
 import { PageEmpty, PageError, PageLoading } from './state-views'
 
@@ -67,7 +68,7 @@ export default function GroupPreferenceView({ tripId }: { tripId: string }) {
     })
     const leaderId = data.matrix.userIds[leaderIndex]
     const leaderName = nameById.get(leaderId) ?? leaderId
-    const label = labelByKey.get(key) ?? key
+    const label = labelByKey.get(key) ?? categoryLabel(key)
 
     return [
       `${label}${josa(label, '은', '는')} ${leaderName}의 취향이 가장 높아요. 다른 멤버의 취향과 함께 조율해 일정에 반영해요.`,

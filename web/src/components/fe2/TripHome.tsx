@@ -7,7 +7,7 @@ import { getTrip } from '@/lib/api/trips'
 import { cn } from '@/lib/utils'
 import MemberAvatar from './MemberAvatar'
 import { PageEmpty, PageError, PageLoading } from './state-views'
-import { getTripContents } from './temp-contents'
+import { listTripContents } from '@/lib/api/contents'
 
 export default function TripHome({ tripId }: { tripId: string }) {
   // TripShell이 같은 키로 이미 불러왔으므로 보통 캐시에서 바로 나온다.
@@ -17,7 +17,7 @@ export default function TripHome({ tripId }: { tripId: string }) {
     isPending,
     isError,
     refetch,
-  } = useQuery({ queryKey: ['contents', tripId], queryFn: () => getTripContents(tripId) })
+  } = useQuery({ queryKey: ['contents', tripId], queryFn: () => listTripContents(tripId) })
 
   if (!trip) return null
   if (isPending) return <PageLoading label="저장 현황을 불러오는 중…" />

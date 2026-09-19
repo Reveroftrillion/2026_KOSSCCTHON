@@ -1,17 +1,19 @@
-import type { Trip } from '@/lib/types'
-import { createTripMock, getTripMock, type CreateTripInput } from '@/lib/mocks/trips'
-import { http, USE_MOCK } from './http'
+import type { Trip } from '@/lib/types';
+import { http, USE_MOCK } from './http';
+import * as mocks from '@/lib/mocks';
 
-export type { CreateTripInput }
-
-// POST /trips
-export function createTrip(input: CreateTripInput): Promise<Trip> {
-  if (USE_MOCK) return createTripMock(input)
-  return http<Trip>('/trips', { method: 'POST', body: JSON.stringify(input) })
+export function createTrip(input: {
+  name: string;
+  destination: string;
+  startDate: string;
+  endDate: string;
+  memberIds: string[];
+}): Promise<Trip> {
+  if (USE_MOCK) return mocks.createTrip(input);
+  return http<Trip>('/trips', { method: 'POST', body: JSON.stringify(input) });
 }
 
-// GET /trips/{tripId}
 export function getTrip(tripId: string): Promise<Trip> {
-  if (USE_MOCK) return getTripMock(tripId)
-  return http<Trip>(`/trips/${encodeURIComponent(tripId)}`)
+  if (USE_MOCK) return mocks.getTrip(tripId);
+  return http<Trip>(`/trips/${encodeURIComponent(tripId)}`);
 }

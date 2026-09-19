@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import DemoUserPicker from '@/components/fe2/DemoUserPicker'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -14,8 +13,6 @@ export default function LandingPage() {
           한 사람에게 치우치지 않은 여행 일정을 만들어줘요.
         </p>
       </section>
-
-      <DemoUserPicker />
 
       <Link href="/trips/new" className={cn(buttonVariants({ size: 'lg' }), 'w-full')}>
         여행방 만들기

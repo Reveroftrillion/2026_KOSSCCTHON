@@ -1,4 +1,5 @@
 import type { GroupPreferences } from '@/lib/types'
+import { categoryLabel } from '@/lib/categories'
 import { cn } from '@/lib/utils'
 import MemberAvatar from './MemberAvatar'
 
@@ -51,7 +52,7 @@ export default function GroupPreferenceMatrix({ data }: { data: GroupPreferences
                   className="border-b border-slate-100 p-2 text-left align-top text-sm font-medium text-slate-800"
                 >
                   <div className="flex flex-wrap items-center gap-1">
-                    {labelByKey.get(key) ?? key}
+                    {labelByKey.get(key) ?? categoryLabel(key)}
                     {commonKeys.has(key) && (
                       <span className="rounded-full bg-blue-100 px-1.5 py-0.5 text-[10px] font-semibold text-blue-700">
                         공통

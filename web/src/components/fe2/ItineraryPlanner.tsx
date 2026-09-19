@@ -6,7 +6,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { getTrip } from '@/lib/api/trips'
 import { getTripItinerary, postGroupItinerary } from '@/lib/api/itinerary'
 import type { Itinerary, ItineraryRequest } from '@/lib/types'
-import { getTripContents } from './temp-contents'
+import { listTripContents } from '@/lib/api/contents'
 import ItineraryGeneratingSteps from './ItineraryGeneratingSteps'
 import ItineraryRequestForm from './ItineraryRequestForm'
 import ItineraryResult from './ItineraryResult'
@@ -22,7 +22,7 @@ export default function ItineraryPlanner({ tripId }: { tripId: string }) {
 
   const contentsQuery = useQuery({
     queryKey: ['contents', tripId],
-    queryFn: () => getTripContents(tripId),
+    queryFn: () => listTripContents(tripId),
   })
 
   // 재진입/새로고침 시 최신 일정 복원. 없으면 null.
