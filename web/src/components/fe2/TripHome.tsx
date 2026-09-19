@@ -40,14 +40,14 @@ export default function TripHome({ tripId }: { tripId: string }) {
   return (
     <div className="space-y-6">
       <section>
-        <h2 className="mb-2 text-sm font-semibold text-slate-700">멤버별 저장 현황</h2>
+        <h2 className="mb-2 text-sm font-semibold text-foreground/90">멤버별 저장 현황</h2>
         <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
           {trip.members.map((m) => (
             <li key={m.userId} className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white p-3">
               <MemberAvatar name={m.name} />
               <div className="min-w-0">
-                <p className="truncate text-sm font-medium text-slate-900">{m.name}</p>
-                <p className="text-xs text-slate-500">{counts.get(m.userId) ?? 0}건 저장</p>
+                <p className="truncate text-sm font-medium text-foreground">{m.name}</p>
+                <p className="text-xs text-muted-foreground">{counts.get(m.userId) ?? 0}건 저장</p>
               </div>
             </li>
           ))}

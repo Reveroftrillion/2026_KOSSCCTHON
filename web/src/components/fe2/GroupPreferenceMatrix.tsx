@@ -16,19 +16,19 @@ export default function GroupPreferenceMatrix({ data }: { data: GroupPreferences
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-sm font-semibold text-slate-700">취향 매트릭스</h2>
-        <p className="mt-1 text-xs text-slate-500">
+        <h2 className="text-sm font-semibold text-foreground/90">취향 매트릭스</h2>
+        <p className="mt-1 text-xs text-muted-foreground">
           값은 각자의 취향 중 가장 높은 항목을 100으로 둔 상대 점수예요.
         </p>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+      <div className="overflow-x-auto rounded-xl border border-slate-200">
         <table className="w-full min-w-[420px] border-collapse text-sm">
           <thead>
             <tr>
               <th
                 scope="col"
-                className="w-20 border-b border-slate-200 p-2 text-left text-xs font-medium text-slate-500"
+                className="w-20 border-b border-slate-200 p-2 text-left text-xs font-medium text-muted-foreground"
               >
                 카테고리
               </th>
@@ -36,7 +36,7 @@ export default function GroupPreferenceMatrix({ data }: { data: GroupPreferences
                 <th key={userId} scope="col" className="border-b border-slate-200 p-2 text-center">
                   <div className="flex flex-col items-center gap-1">
                     <MemberAvatar name={nameByUserId.get(userId) ?? userId} size="sm" />
-                    <span className="text-xs font-medium text-slate-700">
+                    <span className="text-xs font-medium text-foreground/90">
                       {nameByUserId.get(userId) ?? userId}
                     </span>
                   </div>
@@ -49,7 +49,7 @@ export default function GroupPreferenceMatrix({ data }: { data: GroupPreferences
               <tr key={key}>
                 <th
                   scope="row"
-                  className="border-b border-slate-100 p-2 text-left align-top text-sm font-medium text-slate-800"
+                  className="border-b border-slate-100 p-2 text-left text-sm font-medium text-foreground/95"
                 >
                   <div className="flex flex-wrap items-center gap-1">
                     {labelByKey.get(key) ?? categoryLabel(key)}
@@ -64,11 +64,11 @@ export default function GroupPreferenceMatrix({ data }: { data: GroupPreferences
                   const value = matrix.values[colIndex]?.[rowIndex] ?? 0
                   const isUnique = uniqueByUserKey.has(`${userId}:${key}`)
                   return (
-                    <td key={userId} className="border-b border-slate-100 p-2 text-center align-top">
+                    <td key={userId} className="border-b border-slate-100 p-2 text-center">
                       <div
                         className={cn(
                           'mx-auto flex h-9 w-14 items-center justify-center rounded-lg text-sm font-semibold',
-                          value === 0 ? 'text-slate-400' : 'text-white',
+                          value === 0 ? 'text-muted-foreground/80' : 'text-white',
                         )}
                         style={
                           value > 0
@@ -88,7 +88,7 @@ export default function GroupPreferenceMatrix({ data }: { data: GroupPreferences
         </table>
       </div>
 
-      <p className="text-xs text-slate-500">
+      <p className="text-xs text-muted-foreground">
         진한 칸일수록 그 사람의 취향에서 비중이 크다는 뜻이에요. 파란 배지는 2명 이상의 공통 취향, 주황
         글자는 특정 멤버만 뚜렷하게 강한 개인 고유 취향이에요.
       </p>

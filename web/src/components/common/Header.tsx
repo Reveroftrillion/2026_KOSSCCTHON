@@ -5,6 +5,7 @@ import { UserRound } from 'lucide-react';
 import { useUser } from '@/lib/user-context';
 import { cn } from '@/lib/utils';
 import { UserAvatar } from './UserAvatar';
+import { ThemeToggle } from './ThemeToggle';
 
 // 데모 유저(3명) 전환 UI. 클릭한 유저로 전역 currentUser가 바뀌어
 // 개인 취향/장바구니 등 유저 종속 데이터가 함께 바뀐다 (C-04 완료 기준).
@@ -41,6 +42,7 @@ export function Header() {
           ))}
         </div>
       </div>
+      <ThemeToggle />
     </header>
   );
 }

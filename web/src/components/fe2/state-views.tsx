@@ -48,8 +48,8 @@ export function PageEmpty({
 }) {
   return (
     <div className="rounded-xl border border-dashed border-slate-300 bg-white p-6 text-center">
-      <p className="font-semibold text-slate-800">{title}</p>
-      {description && <p className="mt-1 text-sm text-slate-500">{description}</p>}
+      <p className="font-semibold text-foreground/95">{title}</p>
+      {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
       {children && <div className="mt-4 flex justify-center">{children}</div>}
     </div>
   )
