@@ -78,6 +78,41 @@ function addMinutes(hhmm: string, minutes: number): string {
   return `${String(nh).padStart(2, '0')}:${String(nm).padStart(2, '0')}`
 }
 
+// ---- 최신 일정 저장소 (mock 전용). 새로고침 후 GET /trips/{id}/itinerary 복원용 ----
+const STORAGE_KEY = 'tripclip:mock:itineraries'
+const memory = new Map<string, Itinerary>()
+
+function load(): Map<string, Itinerary> {
+  if (memory.size === 0 && typeof window !== 'undefined') {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY)
+      if (raw) {
+        for (const [tripId, it] of Object.entries(JSON.parse(raw) as Record<string, Itinerary>)) {
+          memory.set(tripId, it)
+        }
+      }
+    } catch {
+      // 저장값이 깨졌으면 무시하고 빈 상태로 시작
+    }
+  }
+  return memory
+}
+
+function persist() {
+  if (typeof window === 'undefined') return
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(Object.fromEntries(memory)))
+  } catch {
+    // 저장 실패는 데모 동작에 영향 없음
+  }
+}
+
+// GET /trips/{tripId}/itinerary — 없으면 null (실 API의 404와 동일하게 취급)
+export async function getTripItineraryMock(tripId: string): Promise<Itinerary | null> {
+  await sleep(300 + Math.random() * 400)
+  return load().get(tripId) ?? null
+}
+
 export async function postGroupItineraryMock(tripId: string, request: ItineraryRequest): Promise<Itinerary> {
   await sleep(1600 + Math.random() * 900)
 
@@ -138,6 +173,7 @@ export async function postGroupItineraryMock(tripId: string, request: ItineraryR
 
   const items = [...seedItems, ...mustVisitItems]
 
+  // 반영도는 "서버"가 계산한다(SPEC 5-3). 프론트 컴포넌트는 이 값을 그대로 표시만 한다.
   const reflection = trip.members.map((member) => {
     const top = group.members.find((m) => m.userId === member.userId)?.top ?? []
     const coveredKeys = new Set<string>(
@@ -158,7 +194,7 @@ export async function postGroupItineraryMock(tripId: string, request: ItineraryR
     items.some((item) => item.relatedUsers.some((u) => u.userId === member.userId)),
   )
 
-  return {
+  const itinerary: Itinerary = {
     itineraryId: `it${Date.now().toString(36)}`,
     tripId,
     days: [{ day: 1, date: trip.startDate, items }],
@@ -166,4 +202,8 @@ export async function postGroupItineraryMock(tripId: string, request: ItineraryR
     allMembersCovered,
     rebalanced: false,
   }
+
+  load().set(tripId, itinerary)
+  persist()
+  return itinerary
 }

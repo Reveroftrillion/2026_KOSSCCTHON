@@ -5,6 +5,7 @@ import type { Itinerary } from '@/lib/types'
 import { categoryLabel } from '@/lib/categories'
 import { cn } from '@/lib/utils'
 import ItineraryMap from './ItineraryMap'
+import ReflectionPanel from './ReflectionPanel'
 
 export default function ItineraryResult({
   itinerary,
@@ -15,16 +16,7 @@ export default function ItineraryResult({
 }) {
   return (
     <div className="space-y-5">
-      {itinerary.rebalanced && (
-        <p className="rounded-lg bg-blue-50 px-3 py-2 text-xs font-medium text-blue-800">
-          균형 보정됨 — 특정 멤버에게 치우친 일정을 다시 조율했어요.
-        </p>
-      )}
-      {!itinerary.allMembersCovered && (
-        <p role="alert" className="rounded-lg bg-amber-50 px-3 py-2 text-xs font-medium text-amber-800">
-          아직 일정에 취향이 반영되지 않은 멤버가 있어요.
-        </p>
-      )}
+      <ReflectionPanel itinerary={itinerary} />
 
       {itinerary.days.map((day) => (
         <DayTimeline
@@ -55,6 +47,14 @@ function DayTimeline({
     if (selectedOrder == null) return
     itemRefs.current.get(selectedOrder)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
   }, [selectedOrder])
+
+  if (day.items.length === 0) {
+    return (
+      <p className="rounded-xl border border-dashed border-slate-300 bg-white p-6 text-center text-sm text-slate-500">
+        이 날짜에는 생성된 일정 항목이 없어요.
+      </p>
+    )
+  }
 
   return (
     <section className="space-y-3">
@@ -111,7 +111,7 @@ function DayTimeline({
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   {item.relatedUsers.map((u) => (
                     <span
-                      key={`${item.order}-${u.userId}`}
+                      key={`${item.order}-${u.userId}-${u.preferenceKey}`}
                       className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700"
                     >
                       {memberNameById.get(u.userId) ?? u.userId} · {u.preferenceLabel}
