@@ -93,15 +93,54 @@ def classify_user_conditions(user_conditions: list[str]) -> dict[str, list[str]]
     }
 
 
+def calculate_preference_reflection(
+    user_preferences: dict[str, list[str]], schedule: list[dict[str, Any]]
+) -> dict[str, dict[str, Any]]:
+    """Project-defined calculation rule (README does not specify a formula):
+    for each user, the share of their own unique preference categories that
+    appear at least once among the schedule's unique categories.
+
+    reflection(user) = |user_categories ∩ schedule_categories| / |user_categories| * 100
+
+    Uses only category set membership from user_preferences and schedule
+    "category" values - no personal_preference_db scores, weights,
+    thresholds, related_users, or reason. Duplicate categories in the
+    schedule count once. A user with no recorded preference categories gets
+    a percentage of None (undefined), never an assumed 0% or 100%."""
+    schedule_categories = {
+        item["category"] for item in schedule if item["category"] is not None
+    }
+
+    reflection: dict[str, dict[str, Any]] = {}
+    for user, categories in user_preferences.items():
+        user_categories = set(categories)
+        matched_categories = sorted(user_categories & schedule_categories)
+        total_categories = len(user_categories)
+        percentage = (
+            round(len(matched_categories) / total_categories * 100)
+            if total_categories > 0
+            else None
+        )
+        reflection[user] = {
+            "matched_categories": matched_categories,
+            "total_categories": total_categories,
+            "preference_reflection_percent": percentage,
+        }
+    return reflection
+
+
 def generate_itinerary(sample_input: dict[str, Any]) -> dict[str, Any]:
     """Combine the group preference profile with region/date/time and the
-    user conditions into the basic itinerary structure. reason and
-    preference-reflection percentages are left for a later step."""
+    user conditions into the itinerary structure, including each stop's
+    reason and each user's preference reflection percentage."""
     analysis = analyze_preferences(sample_input["personal_preference_db"])
     balanced = balance_group_preferences(analysis, sample_input["group_saved_places"])
 
     schedule = generate_schedule(balanced["group_preference_profile"], sample_input["time"])
     conditions = classify_user_conditions(sample_input["user_conditions"])
+    preference_reflection = calculate_preference_reflection(
+        analysis["user_preferences"], schedule
+    )
 
     return {
         "region": sample_input["region"],
@@ -110,6 +149,7 @@ def generate_itinerary(sample_input: dict[str, Any]) -> dict[str, Any]:
         "schedule": schedule,
         "verifiable_conditions": conditions["verifiable"],
         "unverifiable_conditions": conditions["unverifiable"],
+        "preference_reflection": preference_reflection,
     }
 
 
@@ -132,6 +172,18 @@ def main() -> None:
     print("\n현재 데이터로 검증할 수 없는 사용자 조건")
     for condition in itinerary["unverifiable_conditions"]:
         print(f"- {condition} (group_saved_places에 관련 정보 없음)")
+
+    print("\n사용자별 취향 반영도 (README 공식이 아닌 프로젝트 계산 규칙)")
+    for user, result in itinerary["preference_reflection"].items():
+        matched = ", ".join(result["matched_categories"]) or "없음"
+        if result["preference_reflection_percent"] is None:
+            percent_text = "계산 불가 (취향 카테고리 없음)"
+        else:
+            percent_text = f"{result['preference_reflection_percent']}%"
+        print(
+            f"- {user}: {percent_text} "
+            f"(일치 카테고리[{matched}] / 전체 취향 카테고리 {result['total_categories']}개)"
+        )
 
 
 if __name__ == "__main__":
