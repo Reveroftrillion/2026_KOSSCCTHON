@@ -11,7 +11,7 @@ from sqlalchemy import create_engine, event, text
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
-from main import app, get_db, hash_password
+from backend.main import app, get_db, hash_password
 
 
 class BackendTests(unittest.TestCase):
@@ -25,7 +25,7 @@ class BackendTests(unittest.TestCase):
             connection.execute("PRAGMA foreign_keys=ON")
             connection.create_function("NOW", 0, lambda: datetime.now().isoformat())
 
-        schema = Path("schema.sql").read_text(encoding="utf-8")
+        schema = (Path(__file__).resolve().parents[1] / "db/schema.sql").read_text(encoding="utf-8")
         schema = re.sub(r"--[^\n]*", "", schema)
         with self.engine.begin() as connection:
             for table in ("users", "user_preferences", "trips", "trip_members"):

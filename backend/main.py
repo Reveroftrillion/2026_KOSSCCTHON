@@ -4,13 +4,7 @@ from pydantic import BaseModel, Field, field_validator
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from datetime import datetime
-import sys
-import os
-
-# 현재 디렉토리를 Python 경로에 추가
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
-from database import get_db
+from backend.database import get_db
 import uuid
 import logging
 import bcrypt
@@ -679,4 +673,4 @@ def delete_trip(trip_id: str, db: Session = Depends(get_db)):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("backend.main:app", host="0.0.0.0", port=8000, reload=True)

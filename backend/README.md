@@ -2,11 +2,13 @@
 
 ```powershell
 python -m pip install -r requirements.txt
-python -m uvicorn main:app --reload
-python -m unittest test_backend -v
+uvicorn backend.main:app --reload
+python -m unittest backend.tests.test_backend -v
 ```
 
 Swagger: `http://localhost:8000/docs`. 현재 AI API 연결은 포함하지 않는다.
+모든 명령은 프로젝트 루트에서 실행한다. `python -m backend.main`도 사용할 수 있다.
+의존성은 기존 루트 `requirements.txt`를 유지한다.
 
 ## DB 환경변수
 
@@ -32,9 +34,9 @@ SHOW COLUMNS FROM user_preferences;
 SHOW CREATE TABLE trips;
 ```
 
-신규 빈 DB에는 `schema.sql`을 적용한다. **schema.sql 수정은 기존 테이블을 자동 변경하지 않는다.**
-`database.init_db()`의 SQLAlchemy Base에는 현재 모델이 등록되지 않아 이 SQL 스키마를 만들지 않는다.
-기존 DB는 백업 및 컬럼 확인 후 `migrations/001_backend_schema_alignment.sql`에서 필요한 문장만 적용한다.
+신규 빈 DB에는 `backend/db/schema.sql`을 적용한다. **schema.sql 수정은 기존 테이블을 자동 변경하지 않는다.**
+`backend.database.init_db()`의 SQLAlchemy Base에는 현재 모델이 등록되지 않아 이 SQL 스키마를 만들지 않는다.
+기존 DB는 백업 및 컬럼 확인 후 `backend/db/migrations/001_backend_schema_alignment.sql`에서 필요한 문장만 적용한다.
 이 파일은 기존 원본 스키마를 기준으로 하며, 이미 컬럼이 있는 DB에 전체 재실행하면 오류가 난다.
 MySQL DDL은 자동 commit될 수 있다.
 
