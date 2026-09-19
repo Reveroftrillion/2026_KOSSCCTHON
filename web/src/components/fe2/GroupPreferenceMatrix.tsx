@@ -22,7 +22,7 @@ export default function GroupPreferenceMatrix({ data }: { data: GroupPreferences
         </p>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-slate-200">
+      <div className="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
         <table className="w-full min-w-[420px] border-collapse text-sm">
           <thead>
             <tr>
@@ -72,13 +72,13 @@ export default function GroupPreferenceMatrix({ data }: { data: GroupPreferences
                         )}
                         style={
                           value > 0
-                            ? { backgroundColor: `rgba(37, 99, 235, ${Math.max(value / 100, MIN_INTENSITY)})` }
+                            ? { backgroundColor: `rgba(13, 148, 136, ${Math.max(value / 100, MIN_INTENSITY)})` }
                             : undefined
                         }
                       >
                         {value}
                       </div>
-                      {isUnique && <p className="mt-1 text-[10px] font-medium text-amber-600">개인 고유</p>}
+                      {isUnique && <p className="mt-1 text-[10px] font-medium text-orange-600">개인 고유</p>}
                     </td>
                   )
                 })}

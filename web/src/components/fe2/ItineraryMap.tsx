@@ -56,7 +56,7 @@ function KakaoItineraryMap({
     >
       <Polyline
         path={points.map((p) => ({ lat: p.lat, lng: p.lng }))}
-        strokeColor="#2563eb"
+        strokeColor="#0d9488"
         strokeWeight={3}
         strokeOpacity={0.7}
       />

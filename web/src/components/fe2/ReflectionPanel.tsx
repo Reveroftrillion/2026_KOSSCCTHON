@@ -13,7 +13,7 @@ export default function ReflectionPanel({ itinerary }: { itinerary: Itinerary })
   const { reflection, allMembersCovered, rebalanced } = itinerary
 
   return (
-    <section aria-labelledby="reflection-heading" className="rounded-xl border border-slate-200 bg-white p-4">
+    <section aria-labelledby="reflection-heading" className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 id="reflection-heading" className="text-sm font-semibold text-slate-800">
           사람별 취향 반영도

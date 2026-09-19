@@ -143,7 +143,7 @@ function ContentCard({
   saver?: { userId: string; name: string };
 }) {
   return (
-    <li className="flex flex-col gap-2 rounded-xl border border-border p-4">
+    <li className="flex flex-col gap-2 rounded-xl border border-border bg-card p-4 shadow-sm">
       <div className="flex items-start justify-between gap-2">
         <div>
           <p className="font-medium text-foreground">{content.place.name}</p>
@@ -173,7 +173,7 @@ function ContentCard({
         href={content.url}
         target="_blank"
         rel="noreferrer"
-        className="inline-flex w-fit items-center gap-1 text-sm text-primary hover:underline"
+        className="inline-flex w-fit items-center gap-1 text-sm text-secondary-foreground hover:underline"
       >
         원본 보기 <ExternalLink className="size-3.5" />
       </a>

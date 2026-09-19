@@ -85,7 +85,7 @@ export default function MyPreferencesPage() {
         <>
           <section className="flex flex-col gap-3">
             <h2 className="text-sm font-medium text-muted-foreground">상위 카테고리</h2>
-            <div className="flex flex-col gap-3 rounded-xl border border-border p-4">
+            <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-4 shadow-sm">
               {categories.map((item) => (
                 <PreferenceBar key={item.key} item={item} highlighted={highlightKeys.has(item.key)} />
               ))}

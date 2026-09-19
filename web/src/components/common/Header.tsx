@@ -14,7 +14,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-10 flex items-center justify-between border-b border-border bg-background/80 px-4 py-3 backdrop-blur">
-      <Link href="/" className="text-base font-semibold tracking-tight text-foreground">
+      <Link href="/" className="text-base font-extrabold tracking-tight text-secondary-foreground">
         TripClip
       </Link>
       <div className="flex items-center gap-3">

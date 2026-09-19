@@ -78,7 +78,7 @@ function DayTimeline({
               }}
               onClick={() => setSelectedOrder(item.order)}
               className={cn(
-                'cursor-pointer rounded-xl border bg-white p-4 transition-colors',
+                'cursor-pointer rounded-xl border bg-white p-4 shadow-sm transition-colors',
                 active ? 'border-blue-500 ring-2 ring-blue-100' : 'border-slate-200',
               )}
             >
