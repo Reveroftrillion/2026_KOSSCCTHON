@@ -127,11 +127,14 @@ CREATE TABLE shortform_contents (
     area VARCHAR(100),
     activity VARCHAR(255),
     place_name VARCHAR(255),
+    place_id VARCHAR(36),
     recommended_time VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (trip_id) REFERENCES trips(trip_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (place_id) REFERENCES places(place_id) ON DELETE SET NULL,
     UNIQUE KEY unique_shortform (trip_id, user_id, url),
     INDEX idx_shortform_trip (trip_id),
-    INDEX idx_shortform_user (user_id)
+    INDEX idx_shortform_user (user_id),
+    INDEX idx_shortform_place (place_id)
 );

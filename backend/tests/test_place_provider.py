@@ -38,7 +38,7 @@ class PlaceProviderTests(unittest.TestCase):
         self.client.get.return_value = self.response({"documents": [document()]})
         result = service.search_places("성수", [])
         self.assertEqual(result[0], {"place_id": "1", "name": "성수 카페", "category": "cafe",
-                                   "keywords": ["cafe", "음식점", "카페"], "lat": 37.544, "lng": 127.056, "source": "kakao"})
+                                   "keywords": ["cafe", "음식점", "카페"], "lat": 37.544, "lng": 127.056, "address": "", "source": "kakao"})
         self.assertNotIn("date", result[0]["keywords"])
 
     def test_queries_preserve_score_ranking(self):

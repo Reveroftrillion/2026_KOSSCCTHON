@@ -27,6 +27,15 @@ interface BackendShortform {
   recommended_time?: string | null
 
   created_at?: string | null
+
+  place_id?: string | null
+  place_verified?: boolean
+
+  verified_place_name?: string | null
+  place_address?: string | null
+
+  place_latitude?: number | null
+  place_longitude?: number | null
 }
 
 interface ShortformListResponse {
@@ -116,8 +125,25 @@ function toContent(
     platform: 'youtube',
 
     place: {
-      name: item.place_name ?? '',
-      verified: false,
+      name:
+        item.verified_place_name ??
+        item.place_name ??
+        '',
+
+      address:
+        item.place_address ??
+        undefined,
+
+      lat:
+        item.place_latitude ??
+        undefined,
+
+      lng:
+        item.place_longitude ??
+        undefined,
+
+      verified:
+        item.place_verified === true,
     },
 
     category:
@@ -235,7 +261,14 @@ export async function listTripContents(
   )
 }
 
+interface UpdateShortformResponse {
+  status: string
+  data: BackendShortform
+  preference_profile: unknown
+}
+
 export async function patchContent(
+  tripId: string,
   contentId: string,
   patch: Partial<Content>,
 ): Promise<Content> {
@@ -246,9 +279,29 @@ export async function patchContent(
     )
   }
 
-  // Backend에는 아직 숏폼 분석결과 수정 PATCH API가 없음.
-  // 다음 단계에서 연결할 예정.
-  throw new Error(
-    '숏폼 수정 API가 아직 연결되지 않았습니다.',
+  const response =
+    await http<UpdateShortformResponse>(
+      `/api/trips/${encodeURIComponent(tripId)}/shortforms/${encodeURIComponent(contentId)}`,
+      {
+        method: 'PATCH',
+
+        body: JSON.stringify({
+          place_name:
+            patch.place?.name,
+
+          category:
+            patch.category,
+
+          keywords:
+            patch.tags,
+
+          recommended_time:
+            patch.recommendedTime,
+        }),
+      },
+    )
+
+  return toContent(
+    response.data,
   )
 }
