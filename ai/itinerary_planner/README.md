@@ -1,5 +1,58 @@
 # AI1 → AI2 그룹 취향 연결
 
+## Backend 최종 진입점
+
+```python
+from ai.itinerary_planner.ai2_pipeline import run_ai2_pipeline
+
+result = run_ai2_pipeline(
+    conditions={
+        "region": "성수", "date": "토요일", "time": "13:00 ~ 20:00",
+        "user_conditions": [],
+    },
+    profiles=profiles,          # AI1 export_all_preference_profiles(db) 결과
+    place_candidates=places,   # Backend에서 준비한 장소 후보 배열
+)
+```
+
+`run_ai2_pipeline(conditions, profiles=None, place_candidates=None)`은 기존
+`generate_itinerary()`를 한 번 호출하고 `summary`만 덧붙인다. 일정·점수·선택을 재계산하지 않는다.
+None 인자는 기존처럼 샘플 파일을 사용하며, 명시적인 빈 배열은 빈 입력으로 유지한다.
+반환 필드는 `summary`, `schedule`, `preference_coverage`, `preference_reflection`,
+`region`, `date`, `time_range`, `verifiable_conditions`, `unverifiable_conditions`다.
+summary는 실제 결과의 지역·날짜·시간·장소 수·고유 category만 요약한다.
+
+### 서로 다른 두 사용자 지표
+
+- **preference_coverage**: 선택된 장소 중 사용자의 취향과 가장 높은 적합도를 가진 장소의 점수.
+  `max(user_place_score)`이며 빈 일정은 0이다. 기존 fairness 선택에 쓰이는 0~1 점수로 유지한다.
+- **preference_reflection**: 사용자가 가진 취향 카테고리 중 최종 일정에 실제 포함된 카테고리의 비율.
+  `round(100 × |category_preferences.keys() ∩ schedule_categories| / |category_preferences.keys()|)`.
+  반복 category는 한 번만 세고, 사용자에게 없는 category는 분모에 넣지 않는다.
+  명시적으로 0점인 key도 포함한다. 카테고리가 없으면 percent는 null이다.
+  점수 가중치·키워드·related_users와 무관하며 선택에 영향을 주지 않는 별도 지표다.
+
+```json
+{
+  "preference_coverage": {"1": 0.467, "2": 0.55, "3": 0.533},
+  "preference_reflection": {
+    "1": {"matched_categories": ["cafe", "exhibition"], "total_categories": 3, "preference_reflection_percent": 67},
+    "2": {"matched_categories": ["outdoor", "sightseeing"], "total_categories": 3, "preference_reflection_percent": 67},
+    "3": {"matched_categories": ["cafe", "exhibition"], "total_categories": 3, "preference_reflection_percent": 67}
+  }
+}
+```
+
+두 지표는 만족 확률을 나타내지 않는다. feature 브랜치의 reflection·진입점·요약 의도만
+현재 구조에 반영했으며, 실제 scoring evidence에 기반한 reason과 기존 선택 알고리즘을 유지한다.
+legacy saved_places 순회 및 category cycling은 사용하지 않는다.
+
+```powershell
+python ai/itinerary_planner/ai2_pipeline.py
+python ai/itinerary_planner/itinerary_generator.py
+python -m unittest ai.itinerary_planner.test_ai2_pipeline ai.itinerary_planner.test_itinerary ai.itinerary_planner.test_group_preference ai.preference_analyzer.test_pipeline ai.preference_analyzer.test_youtube ai.preference_analyzer.test_exports -v
+```
+
 저장소 루트에서 사용한다. 새로운 의존성은 없다.
 
 ```python

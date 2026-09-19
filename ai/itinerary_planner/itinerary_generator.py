@@ -73,13 +73,36 @@ def generate_itinerary(
     scored = score_places(group, place_candidates)
     selected, coverage = select_places(scored, list(group["users"]))
     conditions = classify_user_conditions(sample_input.get("user_conditions", []))
+    schedule = generate_schedule(selected, sample_input["time"])
     return {
         "region": sample_input["region"], "date": sample_input["date"], "time_range": sample_input["time"],
-        "schedule": generate_schedule(selected, sample_input["time"]),
+        "schedule": schedule,
         "preference_coverage": {user: round(score, 3) for user, score in coverage.items()},
+        "preference_reflection": calculate_preference_reflection(group["users"], schedule),
         "verifiable_conditions": conditions["verifiable"],
         "unverifiable_conditions": conditions["unverifiable"],
     }
+
+
+def calculate_preference_reflection(
+    users: dict[str, dict[str, Any]], schedule: list[dict[str, Any]],
+) -> dict[str, dict[str, Any]]:
+    """Report category-key overlap percentage, independent of max-score coverage.
+
+    Each user's category_preferences keys form the denominator (including explicit
+    zero scores). Schedule duplicates count once; an empty denominator yields None.
+    """
+    scheduled_categories = {stop["category"] for stop in schedule}
+    reflection = {}
+    for user_id, user in users.items():
+        categories = set(user["category_preferences"])
+        matched = sorted(categories & scheduled_categories)
+        reflection[user_id] = {
+            "matched_categories": matched,
+            "total_categories": len(categories),
+            "preference_reflection_percent": round(len(matched) / len(categories) * 100) if categories else None,
+        }
+    return reflection
 
 
 def main() -> None:
