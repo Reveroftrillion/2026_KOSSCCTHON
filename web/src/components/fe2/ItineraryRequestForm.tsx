@@ -12,6 +12,7 @@ import { categoryLabel } from '@/lib/categories'
 
 const schema = z
   .object({
+    date: z.string().optional(),
     area: z.string().trim().min(1, '지역을 입력해 주세요.'),
     startTime: z.string().min(1, '시작 시간을 선택해 주세요.'),
     endTime: z.string().min(1, '종료 시간을 선택해 주세요.'),
@@ -37,11 +38,13 @@ function FieldError({ message }: { message?: string }) {
 
 export default function ItineraryRequestForm({
   defaultArea,
+  defaultDate, endDate, defaultStartTime, defaultEndTime, realMode = false,
   contents,
   isSubmitting,
   onSubmit,
 }: {
   defaultArea?: string
+  defaultDate?: string; endDate?: string; defaultStartTime?: string; defaultEndTime?: string; realMode?: boolean
   contents: Content[]
   isSubmitting: boolean
   onSubmit: (request: ItineraryRequest) => void
@@ -56,10 +59,11 @@ export default function ItineraryRequestForm({
     resolver: zodResolver(schema),
     defaultValues: {
       area: defaultArea ?? '',
-      startTime: '13:00',
-      endTime: '20:00',
+      date: defaultDate,
+      startTime: defaultStartTime ?? '13:00',
+      endTime: defaultEndTime ?? '20:00',
       budget: '',
-      includeMeals: true,
+      includeMeals: !realMode,
       mustVisitContentIds: [],
     },
   })
@@ -80,6 +84,7 @@ export default function ItineraryRequestForm({
   function submit(values: FormValues) {
     const budget = values.budget?.trim() ? Number(values.budget) : undefined
     onSubmit({
+      date: values.date,
       area: values.area.trim(),
       startTime: values.startTime,
       endTime: values.endTime,
@@ -91,25 +96,33 @@ export default function ItineraryRequestForm({
 
   return (
     <form onSubmit={handleSubmit(submit)} className="space-y-5" noValidate>
+      {realMode && (
+        <div>
+          <Label htmlFor="itineraryDate">일정 날짜</Label>
+          <Input id="itineraryDate" type="date" min={defaultDate} max={endDate} {...register('date')} />
+          <p className="mt-2 text-xs text-slate-500">지역과 시간은 여행방 설정을 사용해요. 예산·식사·필수 장소 지정은 아직 지원하지 않아요.</p>
+        </div>
+      )}
       <div>
         <Label htmlFor="area">지역</Label>
-        <Input id="area" placeholder="예: 성수" className="mt-1" {...register('area')} />
+        <Input id="area" placeholder="예: 성수" readOnly={realMode} className="mt-1" {...register('area')} />
         <FieldError message={errors.area?.message} />
       </div>
 
       <div className="grid grid-cols-2 gap-3">
         <div className="min-w-0">
           <Label htmlFor="startTime">시작 시간</Label>
-          <Input id="startTime" type="time" className="mt-1" {...register('startTime')} />
+          <Input id="startTime" type="time" readOnly={realMode} className="mt-1" {...register('startTime')} />
           <FieldError message={errors.startTime?.message} />
         </div>
         <div className="min-w-0">
           <Label htmlFor="endTime">종료 시간</Label>
-          <Input id="endTime" type="time" className="mt-1" {...register('endTime')} />
+          <Input id="endTime" type="time" readOnly={realMode} className="mt-1" {...register('endTime')} />
           <FieldError message={errors.endTime?.message} />
         </div>
       </div>
 
+      {!realMode && <div className="space-y-5">
       <div>
         <Label htmlFor="budget">1인 예산 (선택, 원)</Label>
         <Input id="budget" type="number" min={0} placeholder="예: 50000" className="mt-1" {...register('budget')} />
@@ -179,6 +192,7 @@ export default function ItineraryRequestForm({
         )}
       </div>
 
+      </div>}
       <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
         {isSubmitting ? '일정 만드는 중…' : '공동 일정 만들기'}
       </Button>

@@ -1,5 +1,6 @@
 """Mock Maps boundary and real AI2/SQL persistence tests."""
 import os
+import json
 from datetime import timedelta
 from unittest.mock import patch
 from sqlalchemy import text
@@ -54,6 +55,45 @@ class ItineraryTests(BackendFixture):
         self.assertEqual(len(self.client.get(self.url + "/itineraries").json()), 1)
         with self.engine.connect() as db:
             self.assertEqual(db.execute(text("SELECT COUNT(*) FROM itinerary_places")).scalar_one(), 4)
+
+    def test_map_fields_post_get_and_snapshot(self):
+        candidates = [{**p, "source": "kakao", "address": "서울 성동구 테스트로 1"} for p in search_places("성수", [])]
+        with patch("backend.services.itinerary_service.search_places", return_value=candidates):
+            response = self.generate()
+        self.assertEqual(response.status_code, 201, response.text)
+        result = response.json()
+        self.assertEqual(result["place_source"], "kakao")
+        for stop in result["schedule"]:
+            self.assertIsInstance(stop["latitude"], float)
+            self.assertIsInstance(stop["longitude"], float)
+            self.assertEqual(stop["address"], "서울 성동구 테스트로 1")
+        with self.engine.begin() as db:
+            self.assertEqual(db.execute(text("SELECT address FROM places LIMIT 1")).scalar_one(), "서울 성동구 테스트로 1")
+            db.execute(text("UPDATE places SET latitude=0,address='changed'"))
+        # Existing snapshot fields remain generation-time facts, not current place values.
+        self.assertEqual(self.client.get(self.url + "/itineraries").json(), [result])
+        self.assertEqual(self.client.get(self.url + "/itineraries/" + result["itinerary_id"]).json(), result)
+
+    def test_old_snapshot_map_fields_backfilled(self):
+        result = self.generate().json()
+        for stop in result["schedule"]:
+            for field in ("latitude", "longitude", "address"):
+                stop.pop(field)
+        with self.engine.begin() as db:
+            db.execute(text("UPDATE trip_itineraries SET result_json=:snapshot"), {"snapshot": json.dumps(result)})
+            db.execute(text("UPDATE places SET address='서울 성동구'"))
+        restored = self.client.get(self.url + "/itineraries/" + result["itinerary_id"]).json()
+        for before, after in zip(result["schedule"], restored["schedule"]):
+            self.assertIsInstance(after["latitude"], float)
+            self.assertEqual(after["address"], "서울 성동구")
+            self.assertTrue(before.items() <= after.items())
+
+    def test_missing_coordinates_remain_null(self):
+        candidates = [{**p, "lat": None, "lng": None} for p in search_places("성수", [])]
+        with patch("backend.services.itinerary_service.search_places", return_value=candidates):
+            result = self.generate().json()
+        self.assertTrue(all(stop["latitude"] is None and stop["longitude"] is None for stop in result["schedule"]))
+        self.assertEqual(self.client.get(self.url + "/itineraries").json(), [result])
 
     def test_ai_failure_no_persistence(self):
         with patch("backend.services.itinerary_service.run_ai2_pipeline", side_effect=RuntimeError("secret")):

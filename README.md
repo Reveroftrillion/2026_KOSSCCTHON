@@ -1318,6 +1318,45 @@ TripClip의 최종 목표는 사용자가 직접 여행 취향을 일일이 입�
 
 ---
 
+## Itinerary Frontend ↔ Backend 확인
+
+실제 모드(`NEXT_PUBLIC_USE_MOCK=false`)의 일정 화면은 다음 API를 사용합니다.
+
+- 생성: `POST /api/trips/{trip_id}/itinerary`, 본문 `{"date":"2026-09-20","user_conditions":[]}`
+- 복원: `GET /api/trips/{trip_id}/itineraries` 후 선택 일정의 `/{itinerary_id}` 조회
+- 현재 단일 날짜 결과 화면은 재진입 시 저장된 일정 중 마지막 여행 날짜를 표시합니다.
+
+날짜는 여행 기간 내에서 선택하고 지역·시작/종료 시간은 여행방 DB 설정을 사용합니다.
+예산·식사·필수 장소 조건은 아직 보장되지 않아 실제 모드 입력에서 숨깁니다.
+일정은 저장한 장소의 단순 나열이 아니라 그룹 취향으로 검색한 후보에서 생성됩니다.
+지도 연결선은 방문 순서이며 실제 도로 경로나 이동 시간 보장을 의미하지 않습니다.
+
+API adapter는 ID, 추천 이유, 사용자/그룹 점수, coverage/reflection을 보존합니다.
+반영률은 Backend 값을 표시하며 빈 취향의 null 값은 '취향 데이터 없음'으로 표시합니다.
+신규 일정은 좌표·주소를 snapshot에 저장하고, 이전 일정의 누락된 위치 필드는 places에서 보완합니다.
+DB schema/migration 변경은 없습니다. Backend가 mock 장소를 반환하면 실제 모드에서는 샘플을 표시하지 않고 설정 확인 오류를 보여줍니다.
+
+브라우저 수동 확인:
+
+1. Backend와 Frontend를 실행하고 Frontend의 실제 모드 및 API 주소 설정을 확인합니다.
+2. Backend에는 Kakao REST 키, Frontend에는 `NEXT_PUBLIC_KAKAO_MAP_KEY`를 환경변수로 설정합니다. 환경변수 변경 후 서버를 재시작합니다.
+3. 숏폼과 멤버가 있는 여행방에서 일정 화면을 열고 날짜를 선택해 생성합니다.
+4. Network에서 POST 경로/본문과 201 응답을 확인합니다.
+5. 방문 시간·장소·주소·카테고리·추천 이유·사용자별 반영률을 확인합니다.
+6. 지도 마커를 눌러 해당 일정 카드가 선택되는지 확인합니다. 좌표나 지도 키가 없으면 목록은 유지됩니다.
+7. 새로고침 후 목록/상세 GET으로 일정이 복원되는지 확인합니다. 같은 날짜 재생성은 해당 날짜만 대체합니다.
+8. 기존 Shorts Review 수정·저장, Shared Basket, Group Preference도 확인합니다.
+
+회귀 테스트(프로젝트 루트 기준):
+
+```powershell
+python -m unittest discover -s backend/tests -t . -v
+cd web
+pnpm exec eslint src
+pnpm exec tsc --noEmit
+node tests/itinerary-contract.test.cjs
+```
+
 ## Contributors
 
 2026 KOSSCCTHON Team 7 (111)

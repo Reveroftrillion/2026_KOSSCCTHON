@@ -15,7 +15,7 @@ interface Point {
 
 function toPoints(items: ItineraryItem[]): Point[] {
   return items
-    .filter((item) => item.place.lat != null && item.place.lng != null)
+    .filter((item) => item.place.lat != null && item.place.lng != null && Number.isFinite(item.place.lat) && Number.isFinite(item.place.lng))
     .map((item) => ({ order: item.order, name: item.place.name, lat: item.place.lat as number, lng: item.place.lng as number }))
 }
 

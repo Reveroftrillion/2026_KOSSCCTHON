@@ -55,16 +55,16 @@ def persist_places(db: Session, places: list[dict], region: str) -> dict[str, st
         source_id = place["place_id"]
         db_id = str(uuid.uuid5(uuid.NAMESPACE_URL, f"tripclip:{place.get('source', 'provider')}:{source_id}"))
         mapping[source_id] = db_id
-        values = {"id": db_id, "name": place["name"], "category": place["category"], "lat": place.get("lat"), "lng": place.get("lng"), "region": region}
+        values = {"id": db_id, "name": place["name"], "category": place["category"], "lat": place.get("lat"), "lng": place.get("lng"), "region": region, "address": place.get("address")}
         # MySQL upsert avoids concurrent INSERT races across different trips.
         if db.bind.dialect.name == "mysql":
-            db.execute(text("""INSERT INTO places (place_id,place_name,category,latitude,longitude,region)
-                VALUES (:id,:name,:category,:lat,:lng,:region) ON DUPLICATE KEY UPDATE
-                place_name=:name,category=:category,latitude=:lat,longitude=:lng,region=:region"""), values)
+            db.execute(text("""INSERT INTO places (place_id,place_name,category,latitude,longitude,region,address)
+                VALUES (:id,:name,:category,:lat,:lng,:region,:address) ON DUPLICATE KEY UPDATE
+                place_name=:name,category=:category,latitude=:lat,longitude=:lng,region=:region,address=COALESCE(:address,address)"""), values)
         elif row(db, "SELECT place_id FROM places WHERE place_id=:id", id=db_id):
-            db.execute(text("UPDATE places SET place_name=:name,category=:category,latitude=:lat,longitude=:lng,region=:region WHERE place_id=:id"), values)
+            db.execute(text("UPDATE places SET place_name=:name,category=:category,latitude=:lat,longitude=:lng,region=:region,address=COALESCE(:address,address) WHERE place_id=:id"), values)
         else:
-            db.execute(text("INSERT INTO places (place_id,place_name,category,latitude,longitude,region) VALUES (:id,:name,:category,:lat,:lng,:region)"), values)
+            db.execute(text("INSERT INTO places (place_id,place_name,category,latitude,longitude,region,address) VALUES (:id,:name,:category,:lat,:lng,:region,:address)"), values)
     return mapping
 
 
@@ -93,7 +93,10 @@ def generate_and_save(db: Session, trip_id: str, target: date, user_conditions: 
             raise ServiceError(409, "여행 또는 취향 정보가 변경되었습니다. 다시 생성해주세요.")
         selected_ids = {stop["place_id"] for stop in result["schedule"]}
         mapping = persist_places(db, [p for p in places if p["place_id"] in selected_ids], trip["region"])
+        candidates = {p["place_id"]: p for p in places}
         for stop in result["schedule"]:
+            place = candidates[stop["place_id"]]
+            stop.update(latitude=place.get("lat"), longitude=place.get("lng"), address=place.get("address"))
             stop["place_id"] = mapping[stop["place_id"]]
         day = (target - date.fromisoformat(str(current["start_date"]))).days + 1
         existing = row(db, "SELECT itinerary_id FROM trip_itineraries WHERE trip_id=:trip AND day_number=:day", trip=trip_id, day=day)
@@ -127,4 +130,17 @@ def get_itineraries(db: Session, trip_id: str, itinerary_id: str | None = None) 
     rows = db.execute(text(sql + " ORDER BY day_number"), {"trip": trip_id, "id": itinerary_id}).mappings().all()
     if itinerary_id and not rows:
         raise ServiceError(404, "일정을 찾을 수 없습니다.")
-    return [decode(item["result_json"], {"itinerary_id": item["itinerary_id"], "summary": item["summary"], "legacy": True}) for item in rows]
+    results = [decode(item["result_json"], {"itinerary_id": item["itinerary_id"], "summary": item["summary"], "legacy": True}) for item in rows]
+    # Older snapshots lack map fields. Fill only missing fields; preserve generation-time data.
+    locations = db.execute(text("""SELECT DISTINCT p.place_id,p.latitude,p.longitude,p.address
+        FROM places p JOIN itinerary_places ip ON ip.place_id=p.place_id
+        JOIN trip_itineraries ti ON ti.itinerary_id=ip.itinerary_id WHERE ti.trip_id=:trip"""),
+        {"trip": trip_id}).mappings()
+    by_id = {p["place_id"]: p for p in locations}
+    for result in results:
+        for stop in result.get("schedule", []):
+            place = by_id.get(stop["place_id"], {})
+            for key in ("latitude", "longitude", "address"):
+                value = place.get(key)
+                stop.setdefault(key, float(value) if key != "address" and value is not None else value)
+    return results

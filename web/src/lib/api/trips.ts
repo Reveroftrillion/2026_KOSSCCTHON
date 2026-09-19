@@ -132,6 +132,8 @@ export async function getTrip(
     destination: trip.region,
     startDate: trip.start_date,
     endDate: trip.end_date,
+    dayStartTime: trip.day_start_time.split(':').slice(0, 2).map(part => part.padStart(2, '0')).join(':'),
+    dayEndTime: trip.day_end_time.split(':').slice(0, 2).map(part => part.padStart(2, '0')).join(':'),
     members: membersResponse.data.map(
       (member) => ({
         userId: member.user_id,

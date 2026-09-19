@@ -17,12 +17,15 @@ export default function ItineraryResult({
   return (
     <div className="space-y-5">
       <ReflectionPanel itinerary={itinerary} />
+      {itinerary.summary && <p className="text-sm text-slate-600">{itinerary.summary}</p>}
+      {itinerary.placeSource && <p className="text-xs text-slate-500">장소 정보: {itinerary.placeSource === 'kakao' ? 'Kakao' : itinerary.placeSource}</p>}
+      {!!itinerary.unverifiableConditions?.length && <p className="text-xs text-amber-700">반영을 보장하지 않는 요청: {itinerary.unverifiableConditions.join(', ')}</p>}
 
       {itinerary.days.map((day) => (
         <DayTimeline
           key={day.day}
           day={day}
-          showDayHeader={itinerary.days.length > 1}
+          showDayHeader
           memberNameById={memberNameById}
         />
       ))}
@@ -85,7 +88,7 @@ function DayTimeline({
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <p className="text-xs font-medium text-slate-500">
-                    {item.startTime} – {item.endTime}
+                    {item.startTime}{item.endTime ? ` – ${item.endTime}` : ''}
                   </p>
                   <p className="mt-0.5 truncate text-base font-semibold text-slate-900">
                     <span
@@ -105,7 +108,7 @@ function DayTimeline({
                 </span>
               </div>
 
-              <p className="mt-2 text-sm text-slate-700">{item.reason}</p>
+              <p className="mt-2 text-sm text-slate-700">{Array.from(memberNameById).reduce((reason, [id, name]) => reason.replaceAll(`${id} 사용자`, `${name}님`), item.reason)}</p>
 
               {item.relatedUsers.length > 0 && (
                 <div className="mt-2 flex flex-wrap gap-1.5">

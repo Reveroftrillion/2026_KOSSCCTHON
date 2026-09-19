@@ -1,24 +1,27 @@
 import type { Itinerary, ItineraryRequest } from '@/lib/types'
-import { http, HttpError, USE_MOCK } from './http'
+import { http, USE_MOCK } from './http'
+import { getTrip } from './trips'
+import { fromBackendItinerary, toBackendRequest, type BackendItinerary } from './itinerary-adapter'
 import * as mocks from '@/lib/mocks'
 
-// POST /groups/{id}/itinerary (group_id == trip_id, SPEC 5-2)
-export function postGroupItinerary(tripId: string, request: ItineraryRequest): Promise<Itinerary> {
+export async function postGroupItinerary(tripId: string, request: ItineraryRequest): Promise<Itinerary> {
   if (USE_MOCK) return mocks.createItinerary(tripId, request)
-  return http<Itinerary>(`/groups/${encodeURIComponent(tripId)}/itinerary`, {
-    method: 'POST',
-    body: JSON.stringify(request),
+  const trip = await getTrip(tripId)
+  const raw = await http<BackendItinerary>(`/api/trips/${encodeURIComponent(tripId)}/itinerary`, {
+    method: 'POST', body: JSON.stringify(toBackendRequest(request, trip)),
   })
+  return fromBackendItinerary(raw, trip)
 }
 
-// GET /trips/{tripId}/itinerary — 최신 일정 조회(재진입 복원, SPEC 5-2 * 항목).
-// 아직 생성된 일정이 없으면(404) null을 돌려준다.
+// Restore the last day in the Backend's day-number ordered list.
 export async function getTripItinerary(tripId: string): Promise<Itinerary | null> {
   if (USE_MOCK) return mocks.getLatestItinerary(tripId)
-  try {
-    return await http<Itinerary>(`/trips/${encodeURIComponent(tripId)}/itinerary`)
-  } catch (e) {
-    if (e instanceof HttpError && e.status === 404) return null
-    throw e
-  }
+  const base = `/api/trips/${encodeURIComponent(tripId)}/itineraries`
+  const saved = await http<BackendItinerary[]>(base)
+  if (!saved.length) return null
+  const latest = saved[saved.length - 1]
+  const [raw, trip] = await Promise.all([
+    http<BackendItinerary>(`${base}/${encodeURIComponent(latest.itinerary_id)}`), getTrip(tripId),
+  ])
+  return fromBackendItinerary(raw, trip)
 }

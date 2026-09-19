@@ -10,7 +10,13 @@ function clampPercent(v: number): number {
 }
 
 export default function ReflectionPanel({ itinerary }: { itinerary: Itinerary }) {
-  const { reflection, allMembersCovered, rebalanced } = itinerary
+  const { reflection, rebalanced } = itinerary
+  const evaluable = reflection.filter(r => r.totalTop > 0 && r.reflectionPercent != null)
+  const hasUnreflected = evaluable.some(r => r.reflectionPercent === 0)
+  const hasNoPreference = evaluable.length < reflection.length
+  const title = hasUnreflected ? '미반영 멤버 있음'
+    : evaluable.length === 0 ? '취향 데이터 없음'
+    : hasNoPreference ? '분석 가능한 멤버 취향 모두 반영' : '모든 멤버 반영'
 
   return (
     <section aria-labelledby="reflection-heading" className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
@@ -25,10 +31,10 @@ export default function ReflectionPanel({ itinerary }: { itinerary: Itinerary })
           <span
             className={cn(
               'rounded-full px-2 py-0.5 text-xs font-medium',
-              allMembersCovered ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-800',
+              hasUnreflected ? 'bg-amber-50 text-amber-800' : evaluable.length > 0 ? 'bg-emerald-50 text-emerald-700' : 'bg-slate-100 text-slate-600',
             )}
           >
-            {allMembersCovered ? '모든 멤버 반영' : '미반영 멤버 있음'}
+            {title}
           </span>
         </div>
       </div>
@@ -37,7 +43,13 @@ export default function ReflectionPanel({ itinerary }: { itinerary: Itinerary })
         <p className="mt-2 text-xs text-slate-500">특정 멤버에게 치우친 일정을 AI가 다시 조율했어요.</p>
       )}
 
-      {!allMembersCovered && (
+      {hasNoPreference && (
+        <p className="mt-2 text-xs text-slate-500">
+          {evaluable.length > 0 ? '일부 멤버는 아직 취향 데이터가 없어요.' : '아직 평가할 취향 데이터가 없어요.'}
+        </p>
+      )}
+
+      {hasUnreflected && (
         <p role="alert" className="mt-3 rounded-lg bg-amber-50 px-3 py-2 text-xs font-medium text-amber-800">
           일정에 취향이 한 번도 반영되지 않은 멤버가 있어요. 조건을 바꿔 다시 생성해 보세요.
         </p>
@@ -48,8 +60,9 @@ export default function ReflectionPanel({ itinerary }: { itinerary: Itinerary })
       ) : (
         <ul className="mt-3 space-y-3">
           {reflection.map((r) => {
-            const percent = clampPercent(r.reflectionPercent)
-            const uncovered = r.coveredTop === 0
+            const percent = clampPercent(r.reflectionPercent ?? 0)
+            const noPreference = r.totalTop === 0 || r.reflectionPercent == null
+            const uncovered = !noPreference && r.reflectionPercent === 0
             return (
               <li key={r.userId} className="flex items-center gap-3">
                 <MemberAvatar name={r.name} size="sm" />
@@ -62,10 +75,10 @@ export default function ReflectionPanel({ itinerary }: { itinerary: Itinerary })
                         uncovered ? 'text-amber-700' : 'text-blue-700',
                       )}
                     >
-                      {percent}%
+                      {noPreference ? '취향 데이터 없음' : `${percent}%`}
                     </p>
                   </div>
-                  <div
+                  {!noPreference && <div
                     role="progressbar"
                     aria-label={`${r.name} 취향 반영도`}
                     aria-valuemin={0}
@@ -77,10 +90,10 @@ export default function ReflectionPanel({ itinerary }: { itinerary: Itinerary })
                       className={cn('h-full rounded-full transition-[width]', uncovered ? 'bg-amber-400' : 'bg-blue-500')}
                       style={{ width: `${percent}%` }}
                     />
-                  </div>
+                  </div>}
                   <p className="mt-1 text-xs text-slate-500">
-                    상위 취향 {r.totalTop}개 중 {r.coveredTop}개 반영
-                    {uncovered && ' · 아직 반영된 취향이 없어요'}
+                    선호 카테고리 {r.totalTop}개 중 {r.coveredTop}개 반영
+                    {uncovered && r.totalTop > 0 && ' · 아직 반영된 취향이 없어요'}
                   </p>
                 </div>
               </li>
