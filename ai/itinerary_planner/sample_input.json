@@ -1,0 +1,43 @@
+{
+  "personal_preference_db": {
+    "원영": {
+      "Cafe": 0.82,
+      "Food": 0.71,
+      "Exhibition": 0.64,
+      "Activity": 0.43,
+      "Shopping": 0.21
+    },
+    "민수": [
+      "Shopping",
+      "Popup",
+      "Activity"
+    ],
+    "지수": [
+      "Exhibition",
+      "Cafe",
+      "Photo"
+    ]
+  },
+  "group_saved_places": {
+    "원영": [
+      "성수 카페",
+      "일식 맛집",
+      "서울숲"
+    ],
+    "민수": [
+      "팝업스토어",
+      "빈티지숍"
+    ],
+    "지수": [
+      "전시회",
+      "디저트 카페"
+    ]
+  },
+  "date": "토요일",
+  "time": "13:00 ~ 20:00",
+  "region": "성수",
+  "user_conditions": [
+    "저녁 식사 포함",
+    "1인 예산 50,000원 이하"
+  ]
+}
