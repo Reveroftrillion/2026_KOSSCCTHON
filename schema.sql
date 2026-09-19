@@ -3,6 +3,9 @@ CREATE TABLE users (
     user_id VARCHAR(36) PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    bio TEXT,
+    is_active BOOLEAN DEFAULT TRUE,
     profile_image_url VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -28,6 +31,7 @@ CREATE TABLE trips (
     end_date DATE NOT NULL,
     day_start_time TIME DEFAULT '13:00:00',
     day_end_time TIME DEFAULT '20:00:00',
+    description TEXT,
     status VARCHAR(20) DEFAULT 'planning', -- planning, ongoing, completed
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

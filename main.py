@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from datetime import datetime
@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from database import get_db
 import uuid
 import logging
-import hashlib  # bcrypt 대신 hashlib 사용
+import bcrypt
 
 # 로깅 설정
 logging.basicConfig(level=logging.INFO)
@@ -40,8 +40,7 @@ app.add_middleware(
 
 def hash_password(password: str) -> str:
     """비밀번호를 해싱합니다"""
-    hashed = hashlib.sha256(password.encode('utf-8')).hexdigest()
-    return hashed
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('ascii')
 
 
 # ==================== Pydantic 모델 ====================
@@ -49,8 +48,16 @@ def hash_password(password: str) -> str:
 class UserCreateRequest(BaseModel):
     """사용자 생성 요청 모델"""
     name: str = Field(..., min_length=1, max_length=100, description="사용자 이름")
-    email: str = Field(..., description="이메일")
+    email: str = Field(..., max_length=100, description="이메일")
     password: str = Field(..., min_length=6, description="비밀번호")
+
+    @field_validator("password")
+    @classmethod
+    def validate_password_bytes(cls, value: str) -> str:
+        """bcrypt의 72바이트 제한을 초과하는 비밀번호는 거부한다."""
+        if len(value.encode("utf-8")) > 72:
+            raise ValueError("비밀번호는 UTF-8 기준 72바이트 이하여야 합니다.")
+        return value
 
     class Config:
         json_schema_extra = {
@@ -77,22 +84,22 @@ class TripCreateRequest(BaseModel):
     region: str = Field(..., min_length=1, max_length=100, description="여행 지역")
     start_date: str = Field(..., description="시작 날짜 (YYYY-MM-DD)")
     end_date: str = Field(..., description="종료 날짜 (YYYY-MM-DD)")
-    user_id: str = Field(..., description="사용자 ID")
-    day_start_time: str = Field(default="09:00:00", description="하루 시작 시간")
-    day_end_time: str = Field(default="22:00:00", description="하루 종료 시간")
+    owner_user_id: str = Field(..., min_length=1, max_length=36, description="방장 사용자 ID")
+    day_start_time: str = Field(default="13:00:00", description="하루 시작 시간")
+    day_end_time: str = Field(default="20:00:00", description="하루 종료 시간")
     description: str = Field(default="", description="여행 설명")
 
     class Config:
         json_schema_extra = {
             "example": {
-                "trip_name": "서울 여행",
-                "region": "서울",
-                "start_date": "2026-05-10",
-                "end_date": "2026-05-12",
-                "user_id": "user-123",
-                "day_start_time": "09:00:00",
-                "day_end_time": "22:00:00",
-                "description": "서울 강남 지역 여행"
+                "trip_name": "성수 여행",
+                "region": "성수",
+                "start_date": "2026-09-20",
+                "end_date": "2026-09-20",
+                "owner_user_id": "user-123",
+                "day_start_time": "13:00:00",
+                "day_end_time": "20:00:00",
+                "description": ""
             }
         }
 
@@ -231,10 +238,10 @@ def create_user(
         raise
     except Exception as e:
         db.rollback()
-        logger.error(f"Error creating user: {str(e)}")
+        logger.error(f"Error creating user: {type(e).__name__}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"사용자 생성 중 오류가 발생했습니다: {str(e)}"
+            detail=f"사용자 생성 중 오류가 발생했습니다: {type(e).__name__}"
         )
 
 
@@ -245,7 +252,7 @@ def get_user(user_id: str, db: Session = Depends(get_db)):
     """
     try:
         query = text("""
-            SELECT 
+            SELECT
                 user_id,
                 name,
                 email,
@@ -281,10 +288,10 @@ def get_user(user_id: str, db: Session = Depends(get_db)):
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Error fetching user: {str(e)}")
+        logger.error(f"Error fetching user: {type(e).__name__}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"사용자 조회 중 오류가 발생했습니다: {str(e)}"
+            detail=f"사용자 조회 중 오류가 발생했습니다: {type(e).__name__}"
         )
 
 
@@ -302,9 +309,9 @@ def create_trip(
     - **region**: 여행 지역 (필수)
     - **start_date**: 시작 날짜 YYYY-MM-DD (필수)
     - **end_date**: 종료 날짜 YYYY-MM-DD (필수)
-    - **user_id**: 사용자 ID (필수)
-    - **day_start_time**: 하루 시작 시간 (기본값: 09:00:00)
-    - **day_end_time**: 하루 종료 시간 (기본값: 22:00:00)
+    - **owner_user_id**: 방장 사용자 ID (필수)
+    - **day_start_time**: 하루 시작 시간 (기본값: 13:00:00)
+    - **day_end_time**: 하루 종료 시간 (기본값: 20:00:00)
     - **description**: 여행 설명 (선택사항)
     """
     try:
@@ -346,7 +353,7 @@ def create_trip(
         # 사용자 존재 여부 확인
         user_check = db.execute(
             text("SELECT user_id FROM users WHERE user_id = :user_id"),
-            {"user_id": trip_data.user_id}
+            {"user_id": trip_data.owner_user_id}
         ).fetchone()
 
         if not user_check:
@@ -360,11 +367,11 @@ def create_trip(
 
         query = text("""
             INSERT INTO trips (
-                trip_id, 
-                user_id, 
-                trip_name, 
-                region, 
-                start_date, 
+                trip_id,
+                owner_user_id,
+                trip_name,
+                region,
+                start_date,
                 end_date,
                 day_start_time,
                 day_end_time,
@@ -374,11 +381,11 @@ def create_trip(
                 updated_at
             )
             VALUES (
-                :trip_id, 
-                :user_id, 
-                :trip_name, 
-                :region, 
-                :start_date, 
+                :trip_id,
+                :owner_user_id,
+                :trip_name,
+                :region,
+                :start_date,
                 :end_date,
                 :day_start_time,
                 :day_end_time,
@@ -391,7 +398,7 @@ def create_trip(
 
         db.execute(query, {
             "trip_id": trip_id,
-            "user_id": trip_data.user_id,
+            "owner_user_id": trip_data.owner_user_id,
             "trip_name": trip_data.trip_name,
             "region": trip_data.region,
             "start_date": trip_data.start_date,
@@ -419,10 +426,10 @@ def create_trip(
         raise
     except Exception as e:
         db.rollback()
-        logger.error(f"Error creating trip: {str(e)}")
+        logger.error(f"Error creating trip: {type(e).__name__}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"여행 생성 중 오류가 발생했습니다: {str(e)}"
+            detail=f"여행 생성 중 오류가 발생했습니다: {type(e).__name__}"
         )
 
 
@@ -433,9 +440,9 @@ def get_trip(trip_id: str, db: Session = Depends(get_db)):
     """
     try:
         query = text("""
-            SELECT 
+            SELECT
                 trip_id,
-                user_id,
+                owner_user_id,
                 trip_name,
                 region,
                 start_date,
@@ -462,7 +469,7 @@ def get_trip(trip_id: str, db: Session = Depends(get_db)):
             "status": "success",
             "data": {
                 "trip_id": result[0],
-                "user_id": result[1],
+                "owner_user_id": result[1],
                 "trip_name": result[2],
                 "region": result[3],
                 "start_date": str(result[4]),
@@ -479,10 +486,10 @@ def get_trip(trip_id: str, db: Session = Depends(get_db)):
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Error fetching trip: {str(e)}")
+        logger.error(f"Error fetching trip: {type(e).__name__}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"여행 조회 중 오류가 발생했습니다: {str(e)}"
+            detail=f"여행 조회 중 오류가 발생했습니다: {type(e).__name__}"
         )
 
 
@@ -493,9 +500,9 @@ def get_user_trips(user_id: str, db: Session = Depends(get_db)):
     """
     try:
         query = text("""
-            SELECT 
+            SELECT
                 trip_id,
-                user_id,
+                owner_user_id,
                 trip_name,
                 region,
                 start_date,
@@ -503,7 +510,7 @@ def get_user_trips(user_id: str, db: Session = Depends(get_db)):
                 status,
                 created_at
             FROM trips
-            WHERE user_id = :user_id
+            WHERE owner_user_id = :user_id
             ORDER BY created_at DESC
         """)
 
@@ -512,7 +519,7 @@ def get_user_trips(user_id: str, db: Session = Depends(get_db)):
         trips = [
             {
                 "trip_id": row[0],
-                "user_id": row[1],
+                "owner_user_id": row[1],
                 "trip_name": row[2],
                 "region": row[3],
                 "start_date": str(row[4]),
@@ -530,10 +537,10 @@ def get_user_trips(user_id: str, db: Session = Depends(get_db)):
         }
 
     except Exception as e:
-        logger.error(f"Error fetching user trips: {str(e)}")
+        logger.error(f"Error fetching user trips: {type(e).__name__}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"사용자 여행 조회 중 오류가 발생했습니다: {str(e)}"
+            detail=f"사용자 여행 조회 중 오류가 발생했습니다: {type(e).__name__}"
         )
 
 
@@ -570,10 +577,19 @@ def update_trip(
                 detail="end_date 형식이 잘못되었습니다. (YYYY-MM-DD)"
             )
 
+        if not validate_time_format(trip_data.day_start_time) or not validate_time_format(trip_data.day_end_time):
+            raise HTTPException(status_code=400, detail="시간 형식이 잘못되었습니다. (HH:MM:SS)")
+        if datetime.strptime(trip_data.start_date, "%Y-%m-%d") > datetime.strptime(trip_data.end_date, "%Y-%m-%d"):
+            raise HTTPException(status_code=400, detail="시작 날짜가 종료 날짜보다 클 수 없습니다.")
+        if not db.execute(text("SELECT user_id FROM users WHERE user_id = :user_id"),
+                          {"user_id": trip_data.owner_user_id}).fetchone():
+            raise HTTPException(status_code=404, detail="사용자를 찾을 수 없습니다.")
+
         # 3. 여행 정보 수정
         update_query = text("""
             UPDATE trips
-            SET 
+            SET
+                owner_user_id = :owner_user_id,
                 trip_name = :trip_name,
                 region = :region,
                 start_date = :start_date,
@@ -587,6 +603,7 @@ def update_trip(
 
         db.execute(update_query, {
             "trip_id": trip_id,
+            "owner_user_id": trip_data.owner_user_id,
             "trip_name": trip_data.trip_name,
             "region": trip_data.region,
             "start_date": trip_data.start_date,
@@ -610,10 +627,10 @@ def update_trip(
         raise
     except Exception as e:
         db.rollback()
-        logger.error(f"Error updating trip: {str(e)}")
+        logger.error(f"Error updating trip: {type(e).__name__}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"여행 수정 중 오류가 발생했습니다: {str(e)}"
+            detail=f"여행 수정 중 오류가 발생했습니다: {type(e).__name__}"
         )
 
 
@@ -650,10 +667,10 @@ def delete_trip(trip_id: str, db: Session = Depends(get_db)):
         raise
     except Exception as e:
         db.rollback()
-        logger.error(f"Error deleting trip: {str(e)}")
+        logger.error(f"Error deleting trip: {type(e).__name__}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"여행 삭제 중 오류가 발생했습니다: {str(e)}"
+            detail=f"여행 삭제 중 오류가 발생했습니다: {type(e).__name__}"
         )
 
 

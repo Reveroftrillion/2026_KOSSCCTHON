@@ -1,3 +1,5 @@
+import os
+from sqlalchemy.engine import URL
 from sqlalchemy import create_engine, event
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -8,7 +10,14 @@ import logging
 logger = logging.getLogger(__name__)
 
 # MySQL 연결 URL
-SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:1234@localhost/TripClip"
+SQLALCHEMY_DATABASE_URL = URL.create(
+    "mysql+pymysql",
+    username=os.getenv("DB_USER", "root"),
+    password=os.getenv("DB_PASSWORD", ""),
+    host=os.getenv("DB_HOST", "localhost"),
+    port=int(os.getenv("DB_PORT", "3306")),
+    database=os.getenv("DB_NAME", "tripclip"),
+)
 
 # 엔진 생성 (연결 풀 설정 포함)
 engine = create_engine(
@@ -50,13 +59,13 @@ def get_db():
     try:
         yield db
     except Exception as e:
-        logger.error(f"Database error: {str(e)}")
+        logger.error("Database error: %s", type(e).__name__)
         db.rollback()
         raise
     finally:
         db.close()
 
 def init_db():
-    """데이터베이스 테이블 초기화"""
+    """등록된 ORM 모델만 초기화한다. 현재 테이블은 schema.sql로 별도 생성해야 한다."""
     Base.metadata.create_all(bind=engine)
-    logger.info("Database tables created successfully")
+    logger.info("Registered ORM metadata initialization completed")
