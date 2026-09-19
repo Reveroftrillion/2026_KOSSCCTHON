@@ -7,6 +7,7 @@ import { getTrip } from '@/lib/api/trips'
 import { getTripItinerary, postGroupItinerary } from '@/lib/api/itinerary'
 import type { Itinerary, ItineraryRequest } from '@/lib/types'
 import { listTripContents } from '@/lib/api/contents'
+import { cn } from '@/lib/utils'
 import ItineraryGeneratingSteps from './ItineraryGeneratingSteps'
 import ItineraryRequestForm from './ItineraryRequestForm'
 import ItineraryResult from './ItineraryResult'
@@ -61,7 +62,7 @@ export default function ItineraryPlanner({ tripId }: { tripId: string }) {
         <button
           type="button"
           onClick={() => queryClient.setQueryData<Itinerary | null>(['itinerary', tripId], null)}
-          className={buttonVariants({ variant: 'outline' })}
+          className={cn(buttonVariants({ variant: 'outline' }))}
         >
           새 일정 만들기
         </button>
@@ -84,7 +85,7 @@ export default function ItineraryPlanner({ tripId }: { tripId: string }) {
         <button
           type="button"
           onClick={() => setEditing(true)}
-          className={buttonVariants({ variant: 'outline', className: 'w-full' })}
+          className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}
         >
           다시 생성
         </button>

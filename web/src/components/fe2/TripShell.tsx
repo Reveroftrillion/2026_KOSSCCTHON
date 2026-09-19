@@ -72,7 +72,7 @@ export default function TripShell({ tripId, children }: { tripId: string; childr
                   href={href}
                   aria-current={active ? 'page' : undefined}
                   className={cn(
-                    '-mb-px border-b-2 py-2.5 text-center text-sm font-medium transition-colors',
+                    '-mb-px min-w-0 border-b-2 py-2.5 text-center text-xs font-medium transition-colors sm:text-sm',
                     active
                       ? 'border-blue-600 text-blue-600'
                       : 'border-transparent text-slate-500 hover:text-slate-700',

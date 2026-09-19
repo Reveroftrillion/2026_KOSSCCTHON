@@ -76,10 +76,10 @@ export default function TripHome({ tripId }: { tripId: string }) {
       </section>
 
       <div className="grid grid-cols-2 gap-2">
-        <Link href={`/trips/${tripId}/add`} className={buttonVariants({ variant: 'outline' })}>
+        <Link href={`/trips/${tripId}/add`} className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}>
           숏폼 담기
         </Link>
-        <Link href={`/trips/${tripId}/group`} className={buttonVariants()}>
+        <Link href={`/trips/${tripId}/group`} className={cn(buttonVariants(), 'w-full')}>
           그룹 취향 보기
         </Link>
       </div>
