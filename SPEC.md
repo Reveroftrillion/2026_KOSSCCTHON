@@ -223,8 +223,8 @@ export interface Itinerary {
 | C-04 | `user-context` + 데모 유저 전환 컴포넌트 | [x] | 전환 시 조회 데이터가 바뀜 |
 | C-05 | 공통 컴포넌트 (LoadingSteps, EmptyState, ErrorState, PreferenceBar, UserAvatar, Header) | [x] | FE2가 import 가능 |
 | F1-01 | A. 숏폼 저장 화면 | [x] | 제출 → 로딩 → B 이동 |
-| F1-02 | B. 분석 결과 표시 (verified·confidence 포함) | [ ] | 모든 필드 표시 |
-| F1-03 | B. 수정 + PATCH + 취향 반영 요약 | [ ] | 재조회 시 수정본 유지 |
+| F1-02 | B. 분석 결과 표시 (verified·confidence 포함) | [x] | 모든 필드 표시 |
+| F1-03 | B. 수정 + PATCH + 취향 반영 요약 | [x] | 재조회 시 수정본 유지 |
 | F1-04 | C. 장바구니 (필터·저장자 표시) | [ ] | 멤버/카테고리 필터 동작 |
 | F1-05 | D. 개인 취향 프로필 + 변화 하이라이트 | [ ] | 숏폼 3건 저장 시 점수 누적이 보임, 원점수 미노출 |
 | F1-06 | 로딩/빈/에러 상태, 모바일 점검 | [ ] | 4장 모든 FE1 화면 적용 |
