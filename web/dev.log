@@ -1,0 +1,2851 @@
+$ next dev
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://10.102.89.25:3000
+- Environments: .env.local
+✓ Ready in 3.9s
+✓ Running next.config.ts took 340ms
+
+ GET / 200 in 673ms (next.js: 225ms, application-code: 448ms)
+ GET /trips/trip1/basket 404 in 4.1s (next.js: 2.0s, application-code: 2.1s)
+ GET /trips/trip2/add 404 in 4.2s (next.js: 2.2s, application-code: 1972ms)
+ GET /trips/trip1/basket 404 in 227ms (next.js: 50ms, application-code: 177ms)
+ GET /trips/trip1/group 404 in 215ms (next.js: 46ms, application-code: 169ms)
+ GET /trips/trip1/itinerary 404 in 174ms (next.js: 47ms, application-code: 127ms)
+ GET /trips/new 200 in 904ms (next.js: 172ms, application-code: 732ms)
+ GET /trips/trip1/basket 404 in 248ms (next.js: 47ms, application-code: 201ms)
+ GET /trips/trip1 200 in 4.3s (next.js: 4.0s, application-code: 325ms)
+ GET /trips/trip1/add 404 in 237ms (next.js: 50ms, application-code: 187ms)
+ GET /trips/trip1/basket 404 in 223ms (next.js: 54ms, application-code: 169ms)
+ GET /trips/trip1/basket 404 in 275ms (next.js: 51ms, application-code: 225ms)
+ GET /trips/trip1/add 404 in 313ms (next.js: 62ms, application-code: 251ms)
+ GET /trips/trip2 200 in 383ms (next.js: 67ms, application-code: 316ms)
+ GET / 200 in 161ms (next.js: 31ms, application-code: 130ms)
+ GET /trips/new 200 in 168ms (next.js: 31ms, application-code: 137ms)
+ GET /trips/trip2 200 in 195ms (next.js: 61ms, application-code: 134ms)
+ GET /trips/trip2/add 404 in 148ms (next.js: 49ms, application-code: 99ms)
+ GET /trips/trip2/add 404 in 312ms (next.js: 51ms, application-code: 262ms)
+✓ Compiled in 887ms
+ GET /trips/trip1/basket 200 in 4.3s (next.js: 4.1s, application-code: 173ms)
+ GET /trips/trip2/add 200 in 4.3s (next.js: 4.1s, application-code: 209ms)
+ GET / 200 in 267ms (next.js: 117ms, application-code: 150ms)
+ GET /trips/new 200 in 445ms (next.js: 109ms, application-code: 336ms)
+ GET /trips/trip2 200 in 273ms (next.js: 137ms, application-code: 137ms)
+ GET /trips/trip2/add 200 in 203ms (next.js: 63ms, application-code: 140ms)
+ GET /trips/trip2/basket 200 in 174ms (next.js: 65ms, application-code: 109ms)
+ GET /trips/trip2/group 200 in 4.1s (next.js: 4.0s, application-code: 132ms)
+ GET /trips/trip1/basket 200 in 477ms (next.js: 54ms, application-code: 423ms)
+ GET /trips/trip1/group 200 in 243ms (next.js: 55ms, application-code: 188ms)
+ GET /trips/trip1/itinerary 200 in 4.5s (next.js: 4.1s, application-code: 424ms)
+ GET /trips/trip2/itinerary 200 in 3.2s (next.js: 2.8s, application-code: 435ms)
+ GET /trips/trip2/add 200 in 249ms (next.js: 79ms, application-code: 170ms)
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/providers.tsx:5:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m3 |[0m [36mimport[0m [36mtype[0m { [33mReactNode[0m } [36mfrom[0m [32m'react'[0m;
+  [90m4 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mThemeProvider[0m [36mas[0m [33mNextThemesProvider[0m } [36mfrom[0m [32m'next-themes'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { [33mUserProvider[0m } [36mfrom[0m [32m'@/lib/user-context'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mlet[0m browserQueryClient: [33mQueryClient[0m | [36mundefined[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/providers.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/common/ThemeToggle.tsx:3:1
+Error: Module not found: Can't resolve 'next-themes'
+  [90m1 |[0m [32m'use client'[0m
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m'next-themes'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useEffect, useState } [36mfrom[0m [32m'react'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mThemeToggle[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/common/ThemeToggle.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Client Component Browser]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/common/ThemeToggle.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Client Component SSR]
+    ./src/components/common/Header.tsx [Server Component]
+    ./src/components/common/index.ts [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+✓ Compiled in 2.7s
+ GET / 200 in 1139ms (next.js: 418ms, application-code: 721ms)
+ GET /trips/new 200 in 520ms (next.js: 177ms, application-code: 343ms)
+ GET /trips/trip2 200 in 429ms (next.js: 236ms, application-code: 193ms)
+ GET /trips/trip2/add 200 in 456ms (next.js: 262ms, application-code: 194ms)
+ GET /trips/trip2/review/c5 200 in 4.3s (next.js: 4.0s, application-code: 228ms)
+ GET /trips/trip2/basket 200 in 601ms (next.js: 384ms, application-code: 216ms)
+ GET /trips/trip2/add 200 in 210ms (next.js: 63ms, application-code: 147ms)
+ GET /trips/trip2/group 200 in 358ms (next.js: 200ms, application-code: 159ms)
+ GET /trips/trip2/itinerary 200 in 517ms (next.js: 216ms, application-code: 302ms)
