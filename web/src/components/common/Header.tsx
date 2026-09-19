@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { UserRound } from 'lucide-react';
 import { useUser } from '@/lib/user-context';
 import { cn } from '@/lib/utils';
 import { UserAvatar } from './UserAvatar';
@@ -15,21 +16,30 @@ export function Header() {
       <Link href="/" className="text-base font-semibold tracking-tight text-foreground">
         TripClip
       </Link>
-      <div className="flex items-center gap-1.5" role="group" aria-label="데모 유저 전환">
-        {users.map((user) => (
-          <button
-            key={user.userId}
-            type="button"
-            onClick={() => setCurrentUserId(user.userId)}
-            aria-pressed={user.userId === currentUser.userId}
-            className={cn(
-              'rounded-full outline-none ring-primary transition',
-              'focus-visible:ring-2 aria-[pressed=true]:ring-2 aria-[pressed=false]:opacity-50'
-            )}
-          >
-            <UserAvatar user={user} size="sm" />
-          </button>
-        ))}
+      <div className="flex items-center gap-3">
+        <Link
+          href="/me/preferences"
+          aria-label="내 취향 프로필"
+          className="text-muted-foreground transition hover:text-foreground"
+        >
+          <UserRound className="size-5" />
+        </Link>
+        <div className="flex items-center gap-1.5" role="group" aria-label="데모 유저 전환">
+          {users.map((user) => (
+            <button
+              key={user.userId}
+              type="button"
+              onClick={() => setCurrentUserId(user.userId)}
+              aria-pressed={user.userId === currentUser.userId}
+              className={cn(
+                'rounded-full outline-none ring-primary transition',
+                'focus-visible:ring-2 aria-[pressed=true]:ring-2 aria-[pressed=false]:opacity-50'
+              )}
+            >
+              <UserAvatar user={user} size="sm" />
+            </button>
+          ))}
+        </div>
       </div>
     </header>
   );
