@@ -78,6 +78,8 @@ For place_name:
 - A region such as 홍대, 성수, 용산, 강남 is area, not place_name, unless the input explicitly names
   a specific venue whose official name is that exact text.
 - Never manufacture or shorten a venue name using outside knowledge.
+- A place_name containing hashtags, emoji-heavy promotional text, or multiple unrelated phrases
+  is not a valid place name and must be null.
 
 Examples for place_name:
 "홍대 맛집 BEST8" -> area="홍대", place_name=null
