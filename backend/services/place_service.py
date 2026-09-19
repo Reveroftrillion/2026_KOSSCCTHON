@@ -6,9 +6,31 @@ from pathlib import Path
 import httpx
 from backend.services.common import ServiceError
 
-CATEGORY_MAP = {"카페": "cafe", "음식점": "food", "식당": "food", "미술관": "exhibition", "전시": "exhibition",
-                "문화시설": "exhibition", "쇼핑": "shopping", "공원": "outdoor", "관광명소": "sightseeing",
-                "숙박": "accommodation", "술집": "nightlife", "주점": "nightlife", "스포츠": "activity"}
+CATEGORY_MAP = {
+    "카페": "cafe",
+    "음식점": "food",
+    "식당": "food",
+    "미술관": "exhibition",
+    "전시": "exhibition",
+    "문화시설": "exhibition",
+
+    "쇼핑": "shopping",
+    "복합쇼핑몰": "shopping",
+    "백화점": "shopping",
+    "아울렛": "shopping",
+    "쇼핑센터": "shopping",
+
+    "공원": "outdoor",
+    "관광명소": "sightseeing",
+    "숙박": "accommodation",
+    "술집": "nightlife",
+    "주점": "nightlife",
+    "스포츠": "activity",
+}
+NON_VISITABLE_SHOPPING_LABELS = {
+    "통신판매",
+    "인터넷쇼핑몰",
+}
 CATEGORIES = {"cafe", "food", "exhibition", "shopping", "outdoor", "activity", "sightseeing", "nightlife", "accommodation", "other"}
 GROUP_CODES = {"CE7": "cafe", "FD6": "food", "CT1": "exhibition", "AT4": "sightseeing",
                "AD5": "accommodation", "MT1": "shopping"}
@@ -46,6 +68,17 @@ def search_queries(region: str, profiles: list[dict]) -> list[str]:
     categories = sorted(totals, key=lambda category: (-totals[category], category))[:TOP_CATEGORIES]
     return [f"{region.strip()} {SEARCH_TERMS[category]}" for category in (categories or ["sightseeing"])]
 
+def is_non_visitable_place(document: dict) -> bool:
+    """Filter places that are not useful as offline itinerary stops."""
+    category_name = document.get("category_name", "")
+
+    labels = {
+        label.strip()
+        for label in category_name.split(">")
+        if label.strip()
+    }
+
+    return bool(labels & NON_VISITABLE_SHOPPING_LABELS)
 
 def normalize_kakao_place(document: dict) -> dict:
     """Use only provider facts for candidate keywords; do not infer mood or amenities."""
@@ -75,6 +108,9 @@ def search_provider_places(region: str, profiles: list[dict]) -> list[dict]:
                 if not isinstance(documents, list):
                     raise ValueError("Invalid documents")
                 for document in documents[:RESULTS_PER_QUERY]:
+                    if is_non_visitable_place(document):
+                        continue
+
                     place = normalize_kakao_place(document)
                     candidates.setdefault(place["place_id"], place)
                     if len(candidates) >= MAX_CANDIDATES:
