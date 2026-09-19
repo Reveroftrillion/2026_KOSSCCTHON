@@ -4,12 +4,14 @@ import os
 import re
 import unittest
 import uuid
+import secrets
 from unittest.mock import patch
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import URL
 from sqlalchemy.orm import sessionmaker
 from backend.main import app, get_db
+from backend.auth import create_access_token
 from backend.services.place_service import search_places
 
 
@@ -17,6 +19,9 @@ from backend.services.place_service import search_places
 class MySQLIntegrationTests(unittest.TestCase):
     def test_real_mysql_persistence(self):
         """Exercise JSON, TIME, UUIDs, upsert, constraints and cascades without DDL."""
+        auth_env = patch.dict(os.environ, {"JWT_SECRET": secrets.token_urlsafe(48), "JWT_EXPIRE_MINUTES": "480"})
+        auth_env.start()
+        self.addCleanup(auth_env.stop)
         database = os.getenv("MYSQL_TEST_DB_NAME", "")
         if not re.fullmatch(r"[a-zA-Z0-9_]+_test", database) or database.lower() == os.getenv("DB_NAME", "tripclip").lower():
             self.fail("MYSQL_TEST_DB_NAME must be a separate *_test database; no connection attempted")
@@ -54,6 +59,7 @@ class MySQLIntegrationTests(unittest.TestCase):
                     db.execute(text("INSERT INTO users (user_id,name,email,password_hash) VALUES (:id,'MySQL test',:email,'unused')"),
                                {"id": user, "email": user + "@example.com"})
             with TestClient(app) as client:
+                client.headers["Authorization"] = "Bearer " + create_access_token(users[0])
                 self.assertEqual(client.get("/health/db").status_code, 200)
                 trip_response = client.post("/api/trips", json={"trip_name": "MySQL test", "region": "성수",
                     "start_date": "2026-09-20", "end_date": "2026-09-20", "owner_user_id": users[0],
@@ -65,6 +71,7 @@ class MySQLIntegrationTests(unittest.TestCase):
                 analysis = {"metadata": {"title": "성수 카페"}, "analysis": {"category": "cafe", "keywords": ["dessert"]}}
                 with patch("backend.services.preference_service.analyze_youtube_url", return_value=analysis):
                     for user in users:
+                        client.headers["Authorization"] = "Bearer " + create_access_token(user)
                         body = {"user_id": user, "url": "https://youtu.be/abcdefghijk"}
                         self.assertEqual(client.post(base + "/shortforms", json=body).status_code, 201)
                         self.assertEqual(client.post(base + "/shortforms", json=body).status_code, 409)

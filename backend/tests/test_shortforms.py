@@ -33,7 +33,9 @@ class ShortformTests(BackendFixture):
         self.assertIsNone(items[0]["place_name"])
 
     def test_reject_nonmember_and_bad_url(self):
+        self.authenticate_as("other")
         self.assertEqual(self.save(user="other").status_code, 403)
+        self.authenticate_as("owner")
         self.assertEqual(self.client.post(self.url, json={"user_id": "owner", "url": "invalid"}).status_code, 400)
         self.mock.assert_not_called()
 
@@ -95,7 +97,7 @@ class ShortformTests(BackendFixture):
         self.assertEqual(result.json()["preference_profile"]["category_preferences"], {"food": 1.0})
 
     def test_missing_user_and_trip(self):
-        self.assertEqual(self.save(user="missing").status_code, 404)
+        self.assertEqual(self.save(user="missing").status_code, 403)
         self.assertEqual(self.client.post("/api/trips/missing/shortforms", json={"user_id": "owner", "url": "https://youtu.be/abcdefghij0"}).status_code, 404)
         self.mock.assert_not_called()
 

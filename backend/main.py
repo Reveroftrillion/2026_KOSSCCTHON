@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import text
 from datetime import datetime
 from backend.database import get_db
+from backend.auth import get_current_user, require_same_user
 import uuid
 import logging
 import bcrypt
@@ -299,7 +300,7 @@ def get_user(user_id: str, db: Session = Depends(get_db)):
         )
 
 @app.get("/api/users")
-def list_users(db: Session = Depends(get_db)):
+def list_users(db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     """활성 사용자 목록 조회 API"""
     try:
         results = db.execute(
@@ -339,7 +340,8 @@ def list_users(db: Session = Depends(get_db)):
 @app.post("/api/trips", response_model=TripResponse, status_code=201)
 def create_trip(
         trip_data: TripCreateRequest,
-        db: Session = Depends(get_db)
+        db: Session = Depends(get_db),
+        current_user: dict = Depends(get_current_user),
 ):
     """
     여행 그룹 생성 API
@@ -353,6 +355,7 @@ def create_trip(
     - **day_end_time**: 하루 종료 시간 (기본값: 20:00:00)
     - **description**: 여행 설명 (선택사항)
     """
+    require_same_user(trip_data.owner_user_id, current_user)
     try:
         # 1. 입력값 검증
         if not validate_date_format(trip_data.start_date):
@@ -738,6 +741,8 @@ app.include_router(members.router)
 app.include_router(shortforms.router)
 app.include_router(preferences.router)
 app.include_router(itineraries.router)
+from backend.routers import auth
+app.include_router(auth.router)
 
 
 @app.exception_handler(ServiceError)

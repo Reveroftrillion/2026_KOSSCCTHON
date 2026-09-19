@@ -4,6 +4,9 @@ from datetime import datetime
 from pathlib import Path
 import re
 import unittest
+import os
+import secrets
+from unittest.mock import patch
 
 import bcrypt
 from fastapi.testclient import TestClient
@@ -12,6 +15,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
 from backend.main import app, get_db, hash_password
+from backend.auth import create_access_token
 
 
 class BackendFixture(unittest.TestCase):
@@ -27,6 +31,10 @@ class BackendFixture(unittest.TestCase):
         cls.client.__exit__(None, None, None)
 
     def setUp(self) -> None:
+        auth_env = patch.dict(os.environ, {"JWT_SECRET": secrets.token_urlsafe(48), "JWT_EXPIRE_MINUTES": "480"})
+        auth_env.start()
+        self.addCleanup(auth_env.stop)
+        self.authenticate_as("owner")
         self.engine = create_engine("sqlite://", connect_args={"check_same_thread": False}, poolclass=StaticPool)
 
         @event.listens_for(self.engine, "connect")
@@ -56,13 +64,19 @@ class BackendFixture(unittest.TestCase):
                      "owner_user_id": "owner", "day_start_time": "13:00:00", "day_end_time": "20:00:00", "description": ""}
 
     def tearDown(self) -> None:
+        self.client.headers.pop("Authorization", None)
         app.dependency_overrides.clear()
         self.engine.dispose()
 
     def create_trip(self) -> str:
+        self.authenticate_as(self.body["owner_user_id"])
         response = self.client.post("/api/trips", json=self.body)
         self.assertEqual(response.status_code, 201, response.text)
         return response.json()["trip_id"]
+
+    def authenticate_as(self, user_id: str) -> None:
+        """Business regression tests use valid JWTs, without bypassing auth dependencies."""
+        self.client.headers["Authorization"] = "Bearer " + create_access_token(user_id)
 
 class BackendTests(BackendFixture):
     def test_post_user(self) -> None:
@@ -118,7 +132,7 @@ class BackendTests(BackendFixture):
         old_body = {**self.body, "user_id": "owner"}
         del old_body["owner_user_id"]
         self.assertEqual(self.client.post("/api/trips", json=old_body).status_code, 422)
-        self.assertEqual(self.client.post("/api/trips", json={**self.body, "owner_user_id": "missing"}).status_code, 404)
+        self.assertEqual(self.client.post("/api/trips", json={**self.body, "owner_user_id": "missing"}).status_code, 403)
         self.assertEqual(self.client.get("/api/users/missing").status_code, 404)
         self.assertEqual(self.client.delete("/api/trips/missing").status_code, 404)
         trip_id = self.create_trip()

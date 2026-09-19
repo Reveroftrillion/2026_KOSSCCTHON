@@ -2,14 +2,15 @@
 
 import Link from 'next/link';
 import { UserRound } from 'lucide-react';
-import { useUser } from '@/lib/user-context';
+import { useAuth } from '@/lib/user-context';
+import { USE_MOCK } from '@/lib/api/http';
 import { cn } from '@/lib/utils';
 import { UserAvatar } from './UserAvatar';
 
 // 데모 유저(3명) 전환 UI. 클릭한 유저로 전역 currentUser가 바뀌어
 // 개인 취향/장바구니 등 유저 종속 데이터가 함께 바뀐다 (C-04 완료 기준).
 export function Header() {
-  const { currentUser, users, setCurrentUserId } = useUser();
+  const { currentUser, users, setCurrentUserId, logout } = useAuth();
 
   return (
     <header className="sticky top-0 z-10 flex items-center justify-between border-b border-border bg-background/80 px-4 py-3 backdrop-blur">
@@ -17,14 +18,14 @@ export function Header() {
         TripClip
       </Link>
       <div className="flex items-center gap-3">
-        <Link
+        {currentUser && <Link
           href="/me/preferences"
           aria-label="내 취향 프로필"
           className="text-muted-foreground transition hover:text-foreground"
         >
           <UserRound className="size-5" />
-        </Link>
-        <div className="flex items-center gap-1.5" role="group" aria-label="데모 유저 전환">
+        </Link>}
+        {USE_MOCK && currentUser ? <div className="flex items-center gap-1.5" role="group" aria-label="데모 유저 전환">
           {users.map((user) => (
             <button
               key={user.userId}
@@ -39,7 +40,10 @@ export function Header() {
               <UserAvatar user={user} size="sm" />
             </button>
           ))}
-        </div>
+        </div> : currentUser ? <>
+          <span className="text-sm">{currentUser.name}</span>
+          <button type="button" onClick={logout} className="text-sm underline">로그아웃</button>
+        </> : <Link href="/login" className="text-sm">로그인</Link>}
       </div>
     </header>
   );

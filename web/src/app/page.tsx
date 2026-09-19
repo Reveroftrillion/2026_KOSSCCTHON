@@ -1,8 +1,12 @@
+'use client'
+
 import Link from 'next/link'
+import { useAuth } from '@/lib/user-context'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 export default function LandingPage() {
+  const { currentUser, isLoading } = useAuth()
   return (
     <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center gap-8 px-4 py-10">
       <section>
@@ -14,9 +18,12 @@ export default function LandingPage() {
         </p>
       </section>
 
-      <Link href="/trips/new" className={cn(buttonVariants({ size: 'lg' }), 'w-full')}>
+      {isLoading ? <p>로그인 정보를 확인하는 중…</p> : currentUser ? <Link href="/trips/new" className={cn(buttonVariants({ size: 'lg' }), 'w-full')}>
         여행방 만들기
-      </Link>
+      </Link> : <div className="flex gap-3">
+        <Link href="/login" className={cn(buttonVariants({ size: 'lg' }), 'flex-1')}>로그인</Link>
+        <Link href="/signup" className={cn(buttonVariants({ size: 'lg', variant: 'outline' }), 'flex-1')}>회원가입</Link>
+      </div>}
     </main>
   )
 }
