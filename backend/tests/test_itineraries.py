@@ -88,8 +88,11 @@ class ItineraryTests(BackendFixture):
             db.execute(text("UPDATE trips SET day_end_time='12:00:00'"))
         self.assertEqual(self.generate().status_code, 400)
 
-    def test_provider_unimplemented_is_explicit(self):
-        with patch.dict(os.environ, {"KAKAO_REST_API_KEY": "test-placeholder"}):
+    def test_provider_failure_is_explicit(self):
+        from backend.services.common import ServiceError
+        with patch.dict(os.environ, {"KAKAO_REST_API_KEY": "test-placeholder"}), patch(
+            "backend.services.place_service.search_provider_places", side_effect=ServiceError(503, "Provider unavailable")
+        ):
             self.assertEqual(self.generate().status_code, 503)
 
     def test_preferences_change_during_generation_rejected(self):

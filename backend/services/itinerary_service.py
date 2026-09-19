@@ -79,7 +79,7 @@ def generate_and_save(db: Session, trip_id: str, target: date, user_conditions: 
         ids = {index: profile["user_id"] for index, profile in enumerate(profiles, 1)}
         adapted = [{**profile, "user_id": index} for index, profile in enumerate(profiles, 1)]
         result = restore_ids(run_ai2_pipeline(conditions, profiles=adapted, place_candidates=places), ids)
-        source = "mock" if all(p.get("source") == "mock" for p in places) else "provider"
+        source = places[0].get("source", "provider") if places else "mock"
     except ServiceError:
         raise
     except Exception:

@@ -159,6 +159,16 @@ def health_check():
 
 # ==================== 사용자 API ====================
 
+@app.get("/health/db")
+def database_health(db: Session = Depends(get_db)) -> dict:
+    """Check connectivity without returning database credentials or driver errors."""
+    from sqlalchemy.exc import SQLAlchemyError
+    try:
+        db.execute(text("SELECT 1"))
+    except SQLAlchemyError:
+        raise HTTPException(status_code=503, detail="Database unavailable") from None
+    return {"status": "ok", "database": "connected"}
+
 @app.post("/api/users", response_model=UserResponse, status_code=201)
 def create_user(
         user_data: UserCreateRequest,
