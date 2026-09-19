@@ -150,7 +150,12 @@ export default function ReviewContentPage() {
       >
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="placeName">장소명</Label>
-          <Input id="placeName" value={placeName} onChange={(e) => setPlaceName(e.target.value)} />
+          <Input
+            id="placeName"
+            value={placeName}
+            onChange={(e) => setPlaceName(e.target.value)}
+            placeholder="특정 장소가 있다면 입력해 주세요."
+          />
         </div>
 
         <div className="flex flex-col gap-1.5">

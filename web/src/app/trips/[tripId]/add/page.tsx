@@ -95,7 +95,11 @@ export default function AddContentPage() {
 
       {mutation.isError && (
         <ErrorState
-          message="분석에 실패했어요. 링크를 확인하고 다시 시도해 주세요."
+          message={
+            mutation.error instanceof Error
+              ? mutation.error.message
+              : '분석에 실패했어요. 링크를 확인하고 다시 시도해 주세요.'
+          }
           onRetry={() => mutation.reset()}
         />
       )}
