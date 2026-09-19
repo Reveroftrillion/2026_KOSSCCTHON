@@ -97,7 +97,7 @@ export default function ItineraryPlanner({ tripId }: { tripId: string }) {
   return (
     <div className="space-y-4">
       {itinerary ? (
-        <div className="flex items-center justify-between gap-2 rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-600">
+        <div className="flex items-center justify-between gap-2 rounded-lg bg-slate-50 px-3 py-2 text-xs text-foreground/80">
           <span className="min-w-0">조건을 바꿔 다시 만들어요. 새 일정이 만들어지면 기존 일정은 대체돼요.</span>
           <button
             type="button"
@@ -108,7 +108,7 @@ export default function ItineraryPlanner({ tripId }: { tripId: string }) {
           </button>
         </div>
       ) : (
-        <p className="text-sm text-slate-600">
+        <p className="text-sm text-foreground/80">
           아직 만들어진 일정이 없어요. 조건을 입력하면 그룹 취향을 바탕으로 AI가 공동 일정을 만들어요.
         </p>
       )}
@@ -120,7 +120,7 @@ export default function ItineraryPlanner({ tripId }: { tripId: string }) {
       )}
 
       {contents.length === 0 && (
-        <p className="rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs text-slate-500">
+        <p className="rounded-lg border border-dashed border-slate-300 bg-white px-3 py-2 text-xs text-muted-foreground">
           저장된 숏폼이 없어도 그룹 취향만으로 일정을 만들 수 있어요. 필수 장소를 고르려면 먼저 숏폼을 담아 주세요.
         </p>
       )}

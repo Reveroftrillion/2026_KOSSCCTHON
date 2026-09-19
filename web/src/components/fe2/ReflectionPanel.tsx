@@ -15,7 +15,7 @@ export default function ReflectionPanel({ itinerary }: { itinerary: Itinerary })
   return (
     <section aria-labelledby="reflection-heading" className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 id="reflection-heading" className="text-sm font-semibold text-slate-800">
+        <h2 id="reflection-heading" className="text-sm font-semibold text-foreground/95">
           사람별 취향 반영도
         </h2>
         <div className="flex flex-wrap gap-1.5">
@@ -34,7 +34,7 @@ export default function ReflectionPanel({ itinerary }: { itinerary: Itinerary })
       </div>
 
       {rebalanced && (
-        <p className="mt-2 text-xs text-slate-500">특정 멤버에게 치우친 일정을 AI가 다시 조율했어요.</p>
+        <p className="mt-2 text-xs text-muted-foreground">특정 멤버에게 치우친 일정을 AI가 다시 조율했어요.</p>
       )}
 
       {!allMembersCovered && (
@@ -44,7 +44,7 @@ export default function ReflectionPanel({ itinerary }: { itinerary: Itinerary })
       )}
 
       {reflection.length === 0 ? (
-        <p className="mt-3 text-sm text-slate-500">반영도 정보가 없어요.</p>
+        <p className="mt-3 text-sm text-muted-foreground">반영도 정보가 없어요.</p>
       ) : (
         <ul className="mt-3 space-y-3">
           {reflection.map((r) => {
@@ -55,7 +55,7 @@ export default function ReflectionPanel({ itinerary }: { itinerary: Itinerary })
                 <MemberAvatar name={r.name} size="sm" />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-baseline justify-between gap-2">
-                    <p className="truncate text-sm font-medium text-slate-800">{r.name}</p>
+                    <p className="truncate text-sm font-medium text-foreground/95">{r.name}</p>
                     <p
                       className={cn(
                         'shrink-0 text-sm font-semibold tabular-nums',
@@ -78,7 +78,7 @@ export default function ReflectionPanel({ itinerary }: { itinerary: Itinerary })
                       style={{ width: `${percent}%` }}
                     />
                   </div>
-                  <p className="mt-1 text-xs text-slate-500">
+                  <p className="mt-1 text-xs text-muted-foreground">
                     상위 취향 {r.totalTop}개 중 {r.coveredTop}개 반영
                     {uncovered && ' · 아직 반영된 취향이 없어요'}
                   </p>

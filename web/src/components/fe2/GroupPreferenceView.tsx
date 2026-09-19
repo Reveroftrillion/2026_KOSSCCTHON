@@ -79,14 +79,14 @@ export default function GroupPreferenceView({ tripId }: { tripId: string }) {
     <div className="space-y-5">
       <GroupPreferenceMatrix data={data} />
 
-      <section className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-        <h2 className="text-sm font-semibold text-slate-700">해석</h2>
+      <section className="rounded-xl border border-slate-200 p-4 shadow-sm">
+        <h2 className="text-sm font-semibold text-foreground/90">해석</h2>
         {commonSentences.length === 0 && uniqueSentences.length === 0 && otherSentences.length === 0 ? (
-          <p className="mt-2 text-sm text-slate-500">
+          <p className="mt-2 text-sm text-muted-foreground">
             아직 뚜렷한 공통·개인 고유 취향을 찾지 못했어요. 숏폼을 더 저장하면 더 정확해져요.
           </p>
         ) : (
-          <ul className="mt-2 space-y-1.5 text-sm text-slate-700">
+          <ul className="mt-2 space-y-1.5 text-sm text-foreground/90">
             {commonSentences.map((s) => (
               <li key={s} className="flex gap-1.5">
                 <span className="mt-0.5 shrink-0 rounded-full bg-blue-100 px-1.5 text-[10px] font-semibold text-blue-700">
@@ -104,8 +104,8 @@ export default function GroupPreferenceView({ tripId }: { tripId: string }) {
               </li>
             ))}
             {otherSentences.map((s) => (
-              <li key={s} className="flex gap-1.5 text-slate-500">
-                <span className="mt-0.5 shrink-0 rounded-full bg-slate-100 px-1.5 text-[10px] font-semibold text-slate-600">
+              <li key={s} className="flex gap-1.5 text-muted-foreground">
+                <span className="mt-0.5 shrink-0 rounded-full bg-slate-100 px-1.5 text-[10px] font-semibold text-foreground/80">
                   기타
                 </span>
                 {s}

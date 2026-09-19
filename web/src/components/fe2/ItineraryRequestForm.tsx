@@ -126,7 +126,7 @@ export default function ItineraryRequestForm({
               'rounded-full border px-4 py-1.5 text-sm transition-colors',
               includeMeals
                 ? 'border-blue-600 bg-blue-600 text-white'
-                : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50',
+                : 'border-slate-300 bg-white text-foreground/90 hover:bg-slate-50',
             )}
           >
             포함
@@ -139,7 +139,7 @@ export default function ItineraryRequestForm({
               'rounded-full border px-4 py-1.5 text-sm transition-colors',
               !includeMeals
                 ? 'border-blue-600 bg-blue-600 text-white'
-                : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50',
+                : 'border-slate-300 bg-white text-foreground/90 hover:bg-slate-50',
             )}
           >
             미포함
@@ -150,7 +150,7 @@ export default function ItineraryRequestForm({
       <div>
         <p className="text-sm font-medium">필수 장소 (장바구니에서 선택, 선택 사항)</p>
         {contents.length === 0 ? (
-          <p className="mt-2 text-xs text-slate-500">아직 저장된 숏폼이 없어요.</p>
+          <p className="mt-2 text-xs text-muted-foreground">아직 저장된 숏폼이 없어요.</p>
         ) : (
           <div className="mt-2 space-y-2">
             {contents.map((content) => {
@@ -165,11 +165,11 @@ export default function ItineraryRequestForm({
                     'flex w-full items-center justify-between rounded-lg border px-3 py-2 text-left text-sm transition-colors',
                     checked
                       ? 'border-blue-600 bg-blue-50 text-blue-800'
-                      : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50',
+                      : 'border-slate-200 bg-white text-foreground/90 hover:bg-slate-50',
                   )}
                 >
                   <span className="truncate">{content.place.name}</span>
-                  <span className="ml-2 shrink-0 text-xs text-slate-400">
+                  <span className="ml-2 shrink-0 text-xs text-muted-foreground/80">
                     {categoryLabel(content.category)}
                   </span>
                 </button>

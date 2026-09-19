@@ -30,7 +30,7 @@ export default function ItineraryGeneratingSteps() {
                   'flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold',
                   state === 'done' && 'bg-blue-600 text-white',
                   state === 'active' && 'animate-pulse bg-blue-100 text-blue-700',
-                  state === 'pending' && 'bg-slate-100 text-slate-400',
+                  state === 'pending' && 'bg-slate-100 text-muted-foreground/80',
                 )}
               >
                 {state === 'done' ? '✓' : i + 1}
@@ -38,7 +38,7 @@ export default function ItineraryGeneratingSteps() {
               <span
                 className={cn(
                   'text-sm',
-                  state === 'pending' ? 'text-slate-400' : 'text-slate-800 font-medium',
+                  state === 'pending' ? 'text-muted-foreground/80' : 'text-foreground/95 font-medium',
                 )}
               >
                 {label}…

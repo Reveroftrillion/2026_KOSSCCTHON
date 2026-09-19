@@ -22,7 +22,7 @@ function toPoints(items: ItineraryItem[]): Point[] {
 // 키가 없을 때 보여줄 비활성 상태. SPEC 8장 F2-08 완료 기준: "키 없으면 지도만 비활성".
 function MapDisabled({ reason }: { reason: string }) {
   return (
-    <div className="flex h-56 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 text-center text-sm text-slate-500">
+    <div className="flex h-56 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 text-center text-sm text-muted-foreground">
       {reason}
     </div>
   )

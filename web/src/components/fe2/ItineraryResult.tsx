@@ -50,7 +50,7 @@ function DayTimeline({
 
   if (day.items.length === 0) {
     return (
-      <p className="rounded-xl border border-dashed border-slate-300 bg-white p-6 text-center text-sm text-slate-500">
+      <p className="rounded-xl border border-dashed border-slate-300 bg-white p-6 text-center text-sm text-muted-foreground">
         이 날짜에는 생성된 일정 항목이 없어요.
       </p>
     )
@@ -59,7 +59,7 @@ function DayTimeline({
   return (
     <section className="space-y-3">
       {showDayHeader && (
-        <h2 className="text-sm font-semibold text-slate-700">
+        <h2 className="text-sm font-semibold text-foreground/90">
           Day {day.day} · {day.date}
         </h2>
       )}
@@ -84,10 +84,10 @@ function DayTimeline({
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <p className="text-xs font-medium text-slate-500">
+                  <p className="text-xs font-medium text-muted-foreground">
                     {item.startTime} – {item.endTime}
                   </p>
-                  <p className="mt-0.5 truncate text-base font-semibold text-slate-900">
+                  <p className="mt-0.5 truncate text-base font-semibold text-foreground">
                     <span
                       className={cn(
                         'mr-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full text-xs font-bold text-white',
@@ -98,14 +98,14 @@ function DayTimeline({
                     </span>
                     {item.place.name}
                   </p>
-                  {item.place.address && <p className="truncate text-xs text-slate-500">{item.place.address}</p>}
+                  {item.place.address && <p className="truncate text-xs text-muted-foreground">{item.place.address}</p>}
                 </div>
-                <span className="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
+                <span className="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-foreground/80">
                   {categoryLabel(item.category)}
                 </span>
               </div>
 
-              <p className="mt-2 text-sm text-slate-700">{item.reason}</p>
+              <p className="mt-2 text-sm text-foreground/90">{item.reason}</p>
 
               {item.relatedUsers.length > 0 && (
                 <div className="mt-2 flex flex-wrap gap-1.5">

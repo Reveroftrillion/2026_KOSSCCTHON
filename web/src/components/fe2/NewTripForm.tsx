@@ -115,7 +115,7 @@ export default function NewTripForm() {
                       'rounded-full border px-4 py-1.5 text-sm transition-colors',
                       checked
                         ? 'border-blue-600 bg-blue-600 text-white'
-                        : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50',
+                        : 'border-slate-300 bg-white text-foreground/90 hover:bg-slate-50',
                     )}
                   >
                     {user.name}
