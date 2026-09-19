@@ -217,11 +217,11 @@ export interface Itinerary {
 
 | ID | 작업 | 상태 | 완료 기준 |
 |---|---|---|---|
-| C-01 | Next.js+TS+Tailwind+shadcn+TanStack Query 세팅, 4장 폴더 생성 | [ ] | `pnpm dev` 실행 |
-| C-02 | `lib/types.ts` (5-1 그대로) | [ ] | tsc 통과, FE2에 공유 |
-| C-03 | `lib/api/*` + stateful `lib/mocks/*` + 시드 (6장) | [ ] | 5-2 전 엔드포인트가 mock으로 동작 |
-| C-04 | `user-context` + 데모 유저 전환 컴포넌트 | [ ] | 전환 시 조회 데이터가 바뀜 |
-| C-05 | 공통 컴포넌트 (LoadingSteps, EmptyState, ErrorState, PreferenceBar, UserAvatar, Header) | [ ] | FE2가 import 가능 |
+| C-01 | Next.js+TS+Tailwind+shadcn+TanStack Query 세팅, 4장 폴더 생성 | [x] | `pnpm dev` 실행 |
+| C-02 | `lib/types.ts` (5-1 그대로) | [x] | tsc 통과, FE2에 공유 |
+| C-03 | `lib/api/*` + stateful `lib/mocks/*` + 시드 (6장) | [x] | 5-2 전 엔드포인트가 mock으로 동작 |
+| C-04 | `user-context` + 데모 유저 전환 컴포넌트 | [x] | 전환 시 조회 데이터가 바뀜 |
+| C-05 | 공통 컴포넌트 (LoadingSteps, EmptyState, ErrorState, PreferenceBar, UserAvatar, Header) | [x] | FE2가 import 가능 |
 | F1-01 | A. 숏폼 저장 화면 | [ ] | 제출 → 로딩 → B 이동 |
 | F1-02 | B. 분석 결과 표시 (verified·confidence 포함) | [ ] | 모든 필드 표시 |
 | F1-03 | B. 수정 + PATCH + 취향 반영 요약 | [ ] | 재조회 시 수정본 유지 |
