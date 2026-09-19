@@ -1,7 +1,7 @@
 """누적 분석 결과를 이용한 취향 계산과 MVP 메모리 저장소."""
 
 from collections import Counter
-from typing import Iterable
+from typing import Any, Iterable
 
 if __package__:
     from .schemas import AnalyzedContent, PreferenceProfile
@@ -64,3 +64,43 @@ class PreferenceDB:
     def get_all_profiles(self) -> dict[int, PreferenceProfile]:
         """사용자 ID를 키로 전체 취향 DB의 스냅샷을 반환한다."""
         return {user_id: self.get_profile(user_id) for user_id in sorted(self._contents)}
+
+    def get_contents(self, user_id: int) -> list[AnalyzedContent]:
+        """근거 조회용 분석 이력 복사본을 반환한다. 저장된 원본은 노출하지 않는다."""
+        return [item.model_copy(deep=True) for item in self._contents.get(user_id, [])]
+
+
+def export_preference_profile(
+    user_id: int, preference_db: PreferenceDB, *, include_evidence: bool = False,
+) -> dict[str, Any]:
+    """사용자 취향을 JSON 호환 dict로 반환한다. 선택적으로 콘텐츠 근거를 포함한다."""
+    user_id = PreferenceProfile(user_id=user_id).user_id
+    profile = preference_db.get_profile(user_id)
+    result = profile.model_dump(mode="json")
+    if include_evidence:
+        contents = preference_db.get_contents(user_id)
+        result["evidence"] = {
+            "categories": [
+                {"category": category, "score": score, "sources": [
+                    {"title": item.title, "url": str(item.url) if item.url else None}
+                    for item in contents if item.category == category
+                ]}
+                for category, score in profile.category_preferences.items()
+            ],
+            "keywords": [
+                {"keyword": keyword, "score": score, "sources": [
+                    {"title": item.title, "url": str(item.url) if item.url else None}
+                    for item in contents if keyword in item.keywords
+                ]}
+                for keyword, score in profile.keyword_preferences.items()
+            ],
+        }
+    return result
+
+
+def export_all_preference_profiles(
+    preference_db: PreferenceDB, *, include_evidence: bool = False,
+) -> list[dict[str, Any]]:
+    """사용자 ID 오름차순으로 전체 프로필을 JSON 호환 배열로 반환한다."""
+    return [export_preference_profile(user_id, preference_db, include_evidence=include_evidence)
+            for user_id in preference_db.get_all_profiles()]

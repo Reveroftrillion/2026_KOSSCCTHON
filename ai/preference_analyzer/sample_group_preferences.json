@@ -1,0 +1,17 @@
+[
+  {
+    "user_id": 1,
+    "category_preferences": {"cafe": 0.5, "food": 0.25, "exhibition": 0.25},
+    "keyword_preferences": {"dessert": 0.5, "date": 0.5, "quiet": 0.25, "photo": 0.25}
+  },
+  {
+    "user_id": 2,
+    "category_preferences": {"outdoor": 0.5, "sightseeing": 0.25, "food": 0.25},
+    "keyword_preferences": {"nature": 0.75, "photo": 0.5, "local": 0.25}
+  },
+  {
+    "user_id": 3,
+    "category_preferences": {"exhibition": 0.5, "shopping": 0.25, "cafe": 0.25},
+    "keyword_preferences": {"art": 0.5, "indoor": 0.75, "photo": 0.5, "quiet": 0.25}
+  }
+]

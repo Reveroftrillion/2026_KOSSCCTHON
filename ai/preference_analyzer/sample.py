@@ -35,7 +35,7 @@ def main() -> None:
     for raw_content in CONTENTS:
         content = ContentInput.model_validate(raw_content)
         result = analyze_content(content)
-        analyzed.append({"user_id": content.user_id, "title": content.title, **result.model_dump()})
+        analyzed.append({"user_id": content.user_id, "title": content.title, **result.model_dump(mode="json")})
         db.update(content.user_id, [result])
 
     print("Analyzed Contents:")

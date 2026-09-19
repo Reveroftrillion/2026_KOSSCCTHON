@@ -1,5 +1,151 @@
 # TripClip 콘텐츠 취향 분석 MVP
 
+## 팀 연동 인터페이스 (Backend / AI 2)
+
+아래 함수는 모두 `ai.preference_analyzer`에서 import한다. 반환값은 JSON 문자열이
+아닌 JSON 직렬화 가능한 `dict` 또는 `list`다. 환경변수·API 키는 반환값에 포함하지 않는다.
+Backend는 요청마다 DB를 새로 만들지 말고 같은 `PreferenceDB` 인스턴스를 재사용한다.
+현재 DB는 프로세스 메모리에만 존재하며 서버 재시작 또는 다른 프로세스와 공유되지 않는다.
+
+```python
+from ai.preference_analyzer import (
+    PreferenceDB, process_youtube_url,
+    export_preference_profile, export_all_preference_profiles,
+)
+
+db = PreferenceDB()
+# Backend: URL 처리 → DB 누적 → 사용자 취향 JSON 응답
+result = process_youtube_url(user_id=1, url=youtube_url, preference_db=db)
+profile = export_preference_profile(user_id=1, preference_db=db)
+# AI 2: 아래 배열만 받아 그룹 분석을 개발할 수 있다.
+profiles = export_all_preference_profiles(preference_db=db)
+```
+
+### A. process_youtube_url(user_id, url, preference_db)
+
+입력은 양의 정수 `user_id`, YouTube URL 문자열 `url`, 누적할 `PreferenceDB` 객체다.
+HTTP 요청을 처리하는 Backend는 입력 JSON을 인자로 전달하고 DB 객체는 직접 주입한다.
+아래는 연동 형식을 보여주는 Mock 예시이며 실제 영상의 분석 결과가 아니다.
+
+입력 JSON (`preference_db`는 JSON에 넣지 않는다):
+
+```json
+{"user_id": 1, "url": "https://www.youtube.com/shorts/AbC123_-xyz"}
+```
+
+반환 JSON 예시 (빈 DB에 첫 콘텐츠를 추가한 경우):
+
+```json
+{
+  "metadata": {
+    "platform": "youtube",
+    "url": "https://www.youtube.com/shorts/AbC123_-xyz",
+    "video_id": "AbC123_-xyz",
+    "title": "성수 디저트 카페",
+    "description": "",
+    "tags": [],
+    "channel_title": "TripClip",
+    "thumbnail_url": null
+  },
+  "analysis": {
+    "category": "cafe",
+    "keywords": ["dessert", "cafe"],
+    "area": "성수",
+    "activity": "카페 방문",
+    "place_name": null,
+    "recommended_time": null,
+    "user_id": 1,
+    "title": "성수 디저트 카페",
+    "url": "https://www.youtube.com/shorts/AbC123_-xyz"
+  },
+  "preference_profile": {
+    "user_id": 1,
+    "category_preferences": {"cafe": 1.0},
+    "keyword_preferences": {"cafe": 1.0, "dessert": 1.0}
+  }
+}
+```
+
+수집 실패는 `MetadataError`, 잘못된 사용자 ID는 Pydantic `ValidationError`로 전달한다.
+수집 실패 시 DB는 변경하지 않는다. Claude 오류는 기존 규칙 분석으로 복구한다.
+동일 URL 재처리는 기존 정책대로 별도 콘텐츠로 누적한다.
+
+### B. export_preference_profile(user_id, preference_db, *, include_evidence=False)
+
+입력 JSON 예시는 `{"user_id": 1}`이며, Backend가 DB 객체를 별도로 전달한다.
+반환 예시 (A의 처리 직후):
+
+```json
+{
+  "user_id": 1,
+  "category_preferences": {"cafe": 1.0},
+  "keyword_preferences": {"cafe": 1.0, "dessert": 1.0}
+}
+```
+
+이력이 없는 사용자도 같은 형식으로 반환하며 두 preferences는 `{}`다.
+조회는 DB에 사용자를 추가하거나 이력을 변경하지 않는다.
+
+### C. export_all_preference_profiles(preference_db, *, include_evidence=False)
+
+사용자 ID 입력 없이 DB 객체만 전달한다. 외부 요청 JSON은 `{}`로 둘 수 있다.
+사용자 ID 오름차순 배열을 반환하고 빈 DB는 `[]`를 반환한다.
+두 사용자가 각각 카페와 전시를 한 번 저장한 예시:
+
+```json
+[
+  {
+    "user_id": 1,
+    "category_preferences": {"cafe": 1.0},
+    "keyword_preferences": {"cafe": 1.0, "dessert": 1.0}
+  },
+  {
+    "user_id": 2,
+    "category_preferences": {"exhibition": 1.0},
+    "keyword_preferences": {"art": 1.0, "photo": 1.0}
+  }
+]
+```
+
+AI 2용 [sample_group_preferences.json](sample_group_preferences.json)은 서로 다른 취향을 가진
+3명의 합성 데이터다. 각 사용자 4개 콘텐츠를 가정한 비율이며 실제 사용자/API 데이터가 아니다.
+위 C의 기본 반환 배열과 동일한 구조이며 서버나 API 키 없이 읽을 수 있다.
+
+```python
+import json
+from pathlib import Path
+
+profiles = json.loads(Path("ai/preference_analyzer/sample_group_preferences.json").read_text(encoding="utf-8"))
+```
+
+### 선택적 근거 정보
+
+두 export 함수 모두 `include_evidence=True`를 전달하면 기본 프로필에 `evidence`를 추가한다.
+기본 반환 형식에는 이 필드가 없다. `evidence` 구조 예시:
+
+```json
+{
+  "categories": [
+    {"category": "cafe", "score": 0.5, "sources": [{"title": "성수 디저트 카페", "url": "https://example.com/1"}]}
+  ],
+  "keywords": [
+    {"keyword": "dessert", "score": 0.5, "sources": [{"title": "성수 디저트 카페", "url": "https://example.com/1"}]}
+  ]
+}
+```
+
+위 예시는 전체 콘텐츠 2개 중 1개가 cafe/dessert인 경우의 근거 일부다.
+점수는 기존 프로필 값을 그대로 사용하고, 콘텐츠당 같은 키워드는 한 번만 센다.
+제목·URL은 LLM이 생성하지 않고 원본 입력에서 보관한다. 과거 데이터에 출처가 없으면
+`title`/`url`은 null이다. 동일 콘텐츠를 반복 누적했다면 근거 목록에도 반복 등장한다.
+반환값을 변경해도 저장된 분석 이력에는 영향을 주지 않는다.
+
+연동 검증 (기존 27개 + export 9개):
+
+```powershell
+python -m unittest ai.preference_analyzer.test_pipeline ai.preference_analyzer.test_youtube ai.preference_analyzer.test_exports -v
+```
+
 Python 3.10 이상. 저장소 루트에서 실행한다.
 
 ```powershell

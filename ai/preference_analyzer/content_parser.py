@@ -24,9 +24,9 @@ def analyze_content(content: ContentInput | Mapping[str, Any]) -> AnalyzedConten
             print(f"LLM unavailable. Using rule-based fallback. ({type(exc).__name__})")
         else:
             print("[Parser] llm")
-            return result.model_copy(update={"user_id": item.user_id, "title": item.title})
+            return result.model_copy(update={"user_id": item.user_id, "title": item.title, "url": item.url})
     else:
         print("LLM unavailable. Using rule-based fallback.")
     print("[Parser] rule-based")
     result = analyze_with_rules(item)
-    return result.model_copy(update={"user_id": item.user_id, "title": item.title})
+    return result.model_copy(update={"user_id": item.user_id, "title": item.title, "url": item.url})

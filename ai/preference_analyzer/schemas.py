@@ -59,6 +59,7 @@ class AnalyzedContent(BaseModel):
     recommended_time: Literal["morning", "afternoon", "evening", "night"] | None = None
     user_id: int | None = Field(default=None, gt=0)
     title: str | None = None
+    url: HttpUrl | None = None
 
     @field_validator("category", mode="before")
     @classmethod

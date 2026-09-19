@@ -25,7 +25,7 @@ def analyze_youtube_url(user_id: int, url: str) -> dict[str, Any]:
     ContentInput(user_id=user_id)  # 네트워크 호출 전에 사용자 입력을 검증한다.
     metadata = fetch_youtube_metadata(url)
     analysis = analyze_content(metadata_to_content(user_id, metadata))
-    return {"metadata": metadata.model_dump(), "analysis": analysis.model_dump()}
+    return {"metadata": metadata.model_dump(mode="json"), "analysis": analysis.model_dump(mode="json")}
 
 
 def process_youtube_url(user_id: int, url: str, preference_db: PreferenceDB) -> dict[str, Any]:
